@@ -14,6 +14,9 @@ from tkinter import ttk
 
 #from matplotlib.pyplot import text
 
+from interprete import *
+import gramatica as g
+
 class interfazAreaTexto():
 
     
@@ -57,19 +60,17 @@ class interfazAreaTexto():
 
         def analizar():
             texto =t_editor.get("1.0","end")
-            print(texto)
-            #result1= self.funciones.analizadorLexico(texto)
-          
+            #print(texto)
+            instrucciones = g.parse(texto)
+
+            #print(instrucciones)
+            try:
+               ejec_instrucciones(instrucciones)
+            except Exception as e:
+               print("Error",e)
             
-            #result2 = self.funciones.analSintactico(result1[0])
-
-            #result3 = self.funciones.analSemantico(result2[0],texto)
-     
-
-            #self.funciones.reporteTokens(result1[0])
-            #self.funciones.reporteErrores(result1[1],result2[1],result3[2])
-            #startfile("dynamicForm.html")
-            pass
+            
+            
 
         
         ventana = Tk()

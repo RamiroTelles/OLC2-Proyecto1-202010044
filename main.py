@@ -9,4 +9,6 @@
 from interfazAreaTexto import interfazAreaTexto
 
 
-interfazAreaTexto()
+if __name__ == '__main__':
+
+    interfazAreaTexto()
