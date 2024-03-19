@@ -7,7 +7,7 @@ from instrucciones import *
 def ejec_instrucciones(instrucciones):
     for inst in instrucciones:
         if isinstance(inst,Imprimir): ejec_Imprimir(inst)
-        else: print('Error: instruccion no valida')
+        #else: print('Error: instruccion no valida')
 
 def ejec_Imprimir(inst):
     for exp in inst.lista:

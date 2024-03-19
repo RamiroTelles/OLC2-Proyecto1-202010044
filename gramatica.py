@@ -6,8 +6,12 @@ reservadas = {
     'true':'TRUE',
     'false':'FALSE',
     'let':'LET',
+    'var':'VAR',
     'number': 'NUMBER',
+    'float':'FLOAT',
     'string': 'STRING',
+    'boolean':'BOOLEAN',
+    'char': 'CHAR',
     'if':'IF',
     'else' : 'ELSE',
     'function': 'FUNCTION',
@@ -19,6 +23,7 @@ tokens = [
    
     'PARIZQ',
     'PARDER',
+    'IGUAL',
     'MAS',
     'MENOS',
     'POR',
@@ -38,6 +43,7 @@ tokens = [
     'DOSPUNTOS',
     'INTERROGACION',
     'COMA',
+    'ID',
     'CADENA',
     'ENTERO',
     'DECIMAL',
@@ -45,10 +51,17 @@ tokens = [
     'COMMENTBLOCK'
  ] + list(reservadas.values())
 
-t_CONSOLE   = r'console'
-t_LOG       = r'log'
-t_TRUE      = r'true'
-t_FALSE     = r'false'
+#t_CONSOLE   = r'console'
+#t_LOG       = r'log'
+#t_TRUE      = r'true'
+#t_FALSE     = r'false'
+#t_VAR       = r'var'
+#t_NUMBER    = r'number'
+#t_FLOAT     = r'float'
+#t_STRING    = r'string'
+#t_BOOLEAN   = r'boolean'
+#t_CHAR      = r'char'
+t_IGUAL     = r'='
 t_PARIZQ    = r'\('
 t_PARDER    = r'\)'
 t_MAS       = r'\+'
@@ -107,6 +120,11 @@ def t_DECIMAL(t):
         t.value = 0
     return t
 
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*' 
+    t.type = reservadas.get(t.value.lower(), 'ID')
+    return t
+
 t_ignore = " \t"
 
 t_ignore_COMMENTLINE = r'\/\/.*'
@@ -145,8 +163,46 @@ def p_instrucciones_instruccion(t) :
     t[0] = [t[1]]
 
 def p_instruccion(t) :
-    '''instruccion      : imprimir_instr'''
+    '''instruccion      : imprimir_instr
+                        | declaracion'''
     t[0] = t[1]
+
+def p_declaracion(t):
+    '''declaracion  : VAR ID tipos_declaraciones'''
+
+def p_tipos_declaraciones(t):
+    '''tipos_declaraciones  : DOSPUNTOS declaracion_explicita
+                            | declaracion_implicita'''
+
+def p_declaracion_explicita1(t):
+    '''declaracion_explicita    : tipo PUNTOCOMA'''
+
+def p_declaracion_explicita2(t):
+    '''declaracion_explicita    : tipo IGUAL op_Ternario PUNTOCOMA'''
+
+def p_declaracion_implicita(t):
+    '''declaracion_implicita    : IGUAL op_Ternario PUNTOCOMA'''
+
+
+def p_tipoNumber(t):
+    '''tipo : NUMBER'''
+    t[0]=TIPOS_P.ENTERO
+
+def p_tipoFloat(t):
+    '''tipo : FLOAT'''
+    t[0]=TIPOS_P.FLOAT
+
+def p_tipoString(t):
+    '''tipo : STRING'''
+    t[0]=TIPOS_P.CADENA
+
+def p_tipoBoolean(t):
+    '''tipo : BOOLEAN'''
+    t[0]=TIPOS_P.BOOLEAN
+
+def p_tipoChar(t):
+    '''tipo : CHAR'''
+    t[0]=TIPOS_P.CHAR
 
 def p_instruccion_console(t):
     '''imprimir_instr : CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA'''
