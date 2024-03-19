@@ -1,4 +1,5 @@
 from enum import Enum
+from tipos import TIPOS_P
 
 class OPERACION_ARITMETICA(Enum):
     MAS = 1
@@ -20,12 +21,7 @@ class OPERACION_LOGICA(Enum):
     OR=2
     
 
-class TIPOS_P(Enum):
-    ENTERO=1
-    FLOAT=2
-    CADENA=3
-    BOOLEAN=4
-    CHAR=5
+
 
 
 class ExpresionAritmetica:

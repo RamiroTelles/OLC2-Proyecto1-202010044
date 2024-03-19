@@ -167,21 +167,27 @@ def p_instruccion(t) :
                         | declaracion'''
     t[0] = t[1]
 
-def p_declaracion(t):
-    '''declaracion  : VAR ID tipos_declaraciones'''
+def p_declaracion1(t):
+    '''declaracion  : VAR ID DOSPUNTOS tipo declaracion_explicita'''
+    t[0]= DeclaracionExplicita(t[2],t[5],t[4])
 
-def p_tipos_declaraciones(t):
-    '''tipos_declaraciones  : DOSPUNTOS declaracion_explicita
-                            | declaracion_implicita'''
+
+def p_declaracion2(t):
+    '''declaracion  : VAR ID declaracion_implicita'''
+    t[0] = DeclaracionImplicita(t[2],t[3])
 
 def p_declaracion_explicita1(t):
-    '''declaracion_explicita    : tipo PUNTOCOMA'''
+    '''declaracion_explicita    : PUNTOCOMA'''
+    t[0] = None
 
 def p_declaracion_explicita2(t):
-    '''declaracion_explicita    : tipo IGUAL op_Ternario PUNTOCOMA'''
+    '''declaracion_explicita    : IGUAL op_Ternario PUNTOCOMA'''
+    t[0]= t[2]
+    
 
 def p_declaracion_implicita(t):
     '''declaracion_implicita    : IGUAL op_Ternario PUNTOCOMA'''
+    t[0] = t[2]
 
 
 def p_tipoNumber(t):

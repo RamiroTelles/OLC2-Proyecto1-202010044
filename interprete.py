@@ -7,6 +7,8 @@ from instrucciones import *
 def ejec_instrucciones(instrucciones):
     for inst in instrucciones:
         if isinstance(inst,Imprimir): ejec_Imprimir(inst)
+        elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst)
+        elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst)
         #else: print('Error: instruccion no valida')
 
 def ejec_Imprimir(inst):
@@ -80,3 +82,9 @@ def resolver_expresionTernaria(expTer):
     if ejec_expresion(expTer.exp1):
         return ejec_expresion(expTer.exp2)
     return ejec_expresion(expTer.exp3)
+
+def ejec_declaracion_explicita(inst):
+    print(inst)
+
+def ejec_declaracion_implicita(inst):
+    print(inst)
