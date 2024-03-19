@@ -18,7 +18,7 @@ class OPERACION_REL(Enum):
 class OPERACION_LOGICA(Enum):
     AND=1
     OR=2
-    NOT=3
+    
 
 class TIPOS_P(Enum):
     ENTERO=1
@@ -59,15 +59,18 @@ class ExpresionID():
     def __init__(self,id):
         self.id= id
 
-class ExpresionBoleana:
-    '''Clase Abstracta'''
 
-class ExpresionRelacional(ExpresionBoleana):
+class ExpresionRelacional():
     def __init__(self,exp1,exp2,operador):
         self.exp1= exp1
         self.exp2 = exp2
         self.operador = operador
         self.tipo = TIPOS_P.BOOLEAN
+
+class ExpresionBoleana:
+    '''Clase Abstracta'''
+
+
 
 class ExpresionLogica(ExpresionBoleana):
     def __init__(self,exp1,exp2,operador):
@@ -98,3 +101,11 @@ class ExpresionComillaSimple(ExpresionCadena):
     def __init__(self, cad) :
         self.cad =cad
         self.tipo = TIPOS_P.CHAR
+
+class ExpresionTernaria():
+    def __init__(self,exp1,exp2,exp3):
+        self.exp1=exp1
+        self.exp2=exp2
+        self.exp3=exp3
+        
+        

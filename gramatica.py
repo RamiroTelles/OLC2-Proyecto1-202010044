@@ -1,3 +1,5 @@
+
+
 reservadas = {
     'console':'CONSOLE',
     'log':'LOG',
@@ -119,6 +121,7 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
+    
     print("Error Léxico '%s'" % t.value[0])
     t.lexer.skip(1)
 
@@ -160,6 +163,7 @@ def p_lista_exp2(t):
 
 def p_op_Ternario1(t):
     '''op_Ternario  : exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or'''
+    t[0] = ExpresionTernaria(t[1],t[3],t[5])
 
 def p_op_Ternario2(t):
     '''op_Ternario  : exp_Or'''
@@ -167,6 +171,7 @@ def p_op_Ternario2(t):
 
 def p_exp_Or1(t):
     '''exp_Or   : exp_Or OR exp_And'''
+    t[0] = ExpresionLogica(t[1],t[3],OPERACION_LOGICA.OR)
 
 
 def p_exp_Or2(t):
@@ -175,6 +180,7 @@ def p_exp_Or2(t):
 
 def p_exp_And1(t):
     '''exp_And   : exp_And AND exp_Not'''
+    t[0] = ExpresionLogica(t[1],t[3],OPERACION_LOGICA.AND)
 
 def p_exp_And2(t):
     '''exp_And   : exp_Not'''
@@ -184,6 +190,10 @@ def p_exp_And2(t):
 
 def p_exp_Not1(t):
     '''exp_Not  : lNot exp_Comp'''
+    if t[1]%2==0:
+        t[0] = t[1]
+    else:
+        t[0]= ExpresionNot(t[2])
 
 def p_expNot2(t):
     '''exp_Not  : exp_Comp'''
@@ -191,15 +201,17 @@ def p_expNot2(t):
 
 def p_listaNot1(t):
     '''lNot : lNot NOT'''
-    #t[0]= t[1]+1
+    t[0]= t[1]+1
 
 def p_listaNot2(t):
     '''lNot : NOT'''
-    #t[0]=1
+    t[0]=1
 
 def p_exp_Comp1(t):
     '''exp_Comp : exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
                 | exp_Sum_Menos DISTINTO exp_Sum_Menos'''
+    if t[2] == '=='  : t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.IGUAL)
+    elif t[2] == '!=': t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.NO_IGUAL)
     
 def p_exp_Comp2(t):
     '''exp_Comp    : exp_rel'''
@@ -210,6 +222,10 @@ def p_exp_rel1(t):
                 | exp_Sum_Menos MENOR exp_Sum_Menos
                 | exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
                 | exp_Sum_Menos MENORIGUAL exp_Sum_Menos'''
+    if t[2] == '>'  : t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.MAYOR_QUE)
+    elif t[2] == '<': t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.MENOR_QUE)
+    elif t[2] == '>=': t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.MAYORIGUAL)
+    elif t[2] == '<=': t[0] = ExpresionRelacional(t[1], t[3], OPERACION_REL.MENORIGUAL)
     
 def p_exp_rel2(t):
     '''exp_rel    : exp_Sum_Menos'''
@@ -275,6 +291,8 @@ def p_valorCaracter(t):
 def p_valorBoolean(t):
     '''valor    : TRUE
                 | FALSE'''
+    t[0]=Expresion_True_False(t[1])
+    
     
 
 
@@ -285,8 +303,10 @@ def p_valorBoolean(t):
 
 def p_error(p):
     if p:
+        
         print(f"Error de sintaxis en línea {p.lineno}, columna {p.lexpos}: Token inesperado '{p.value}'")
     else:
+        
         print("Error de sintaxis")
 
 import ply.lex as Lex

@@ -70,7 +70,6 @@ class interfazAreaTexto():
                print("Error",e)
             
             
-            
 
         
         ventana = Tk()
