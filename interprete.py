@@ -5,6 +5,8 @@ from simbolos import *
 from tipos import TIPOS_P,TIPOS_Simbolos
 from errores import error
 
+listaErrores =[]
+
 def ejec_instrucciones(instrucciones,TS):
     for inst in instrucciones:
         if isinstance(inst,Imprimir): ejec_Imprimir(inst,TS)
@@ -100,7 +102,7 @@ def resolver_expresionTernaria(expTer,TS):
 def resolver_expresionId(expId,TS):
     exp_id =  TS.obtener(expId.id)
     if exp_id== None:
-        TS.listaErrores.append(error("Se quiere usar valor null con variable "+expId.id,0,0,"Semantico"))
+        listaErrores.append(error("Se quiere usar valor null con variable "+expId.id,0,0,"Semantico"))
         print("Se quiere usar valor null con variable "+expId.id)
         return
     return exp_id.valor
@@ -111,7 +113,7 @@ def ejec_declaracion_explicita(inst,TS):
 
     if TS.obtener(inst.id)!=None:
         print("Ya declarada variable "+inst.id)
-        TS.listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
+        listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
         return
     try:
         if inst.tipo==TIPOS_P.ENTERO:
@@ -119,20 +121,20 @@ def ejec_declaracion_explicita(inst,TS):
         elif inst.tipo==TIPOS_P.FLOAT:
             exp= float(exp)
         elif inst.tipo==TIPOS_P.CADENA:
-            exp= float(exp)
+            exp= str(exp)
         elif inst.tipo==TIPOS_P.CHAR:
-            exp= float(exp)
+            exp= str(exp)
         elif inst.tipo==TIPOS_P.BOOLEAN:
             exp= bool(exp)
         
     except:
         print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
-        TS.listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
+        listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
 
     if inst.const == True:
         if exp==None:
             print("No asigno valor a const "+inst.id)
-            TS.listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
+            listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
             return
         else:
             simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.CONSTANTE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
@@ -145,13 +147,13 @@ def ejec_declaracion_implicita(inst,TS):
     exp = ejec_expresion(inst.valor,TS)
     if TS.obtener(inst.id)!=None:
         print("Ya declarada variable "+inst.id)
-        TS.listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
+        listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
         return
 
     if inst.const == True:
         if exp==None:
             print("No asigno valor a const "+inst.id)
-            TS.listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
+            listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
             return
         else:
             simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.CONSTANTE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
@@ -165,12 +167,12 @@ def ejec_Asignacion(inst,TS):
     
     if simbolo== None:
         print("No se encontro variable "+inst.id)
-        TS.listaErrores.append(error("No se encontro variable "+inst.id,0,0,"Semantico"))
+        listaErrores.append(error("No se encontro variable "+inst.id,0,0,"Semantico"))
         return
 
     if simbolo.tipo_simbolo==TIPOS_Simbolos.CONSTANTE:
         print("No se puede asignar a Constante "+inst.id)
-        TS.listaErrores.append(error("No se puede asignar a Constante "+inst.id,0,0,"Semantico"))
+        listaErrores.append(error("No se puede asignar a Constante "+inst.id,0,0,"Semantico"))
         return
 
     try:
@@ -179,14 +181,14 @@ def ejec_Asignacion(inst,TS):
         elif simbolo.tipo==TIPOS_P.FLOAT:
             exp= float(exp)
         elif simbolo.tipo==TIPOS_P.CADENA:
-            exp= float(exp)
+            exp= str(exp)
         elif simbolo.tipo==TIPOS_P.CHAR:
-            exp= float(exp)
+            exp= str(exp)
         elif simbolo.tipo==TIPOS_P.BOOLEAN:
             exp= bool(exp)
     except:
         print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
-        TS.listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
+        listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
     TS.actualizar(inst.id,exp)
 
 
@@ -198,8 +200,19 @@ def ejec_controlFlujo(inst,TS):
 
     elif isinstance(inst,inst_while): ejec_While(inst,TS)
     elif isinstance(inst,inst_for): ejec_For(inst,TS)
-    elif isinstance(inst,inst_Continue): return inst
-    elif isinstance(inst,inst_Break): return inst
+    elif isinstance(inst,inst_switch): ejec_Switch(inst,TS)
+    elif isinstance(inst,inst_Continue): 
+        if(TS.ambito[len(TS.ambito)-5:]=='While' or TS.ambito[len(TS.ambito)-3:]=='For'):
+            return inst
+        else:
+            print("Sentencia continue fuera de un Ciclo")
+            listaErrores.append(error("Sentencia continue fuera de un Ciclo",0,0,"Semantico"))
+    elif isinstance(inst,inst_Break): 
+        if(TS.ambito[len(TS.ambito)-5:]=='While' or TS.ambito[len(TS.ambito)-3:]=='For' or TS.ambito[len(TS.ambito)-6:]=='Switch'):
+            return inst
+        else:
+            print("Sentencia break fuera de flujo de control valido")
+            listaErrores.append(error("Sentencia break fuera de flujo de control valido",0,0,"Semantico"))
     
 def ejec_If(inst,TS):
     exp = ejec_expresion(inst.cond,TS)
@@ -249,3 +262,31 @@ def ejec_For(inst,TS):
         exp = ejec_expresion(inst.cond,TablaLocal)
     TS.salida+= TablaLocal.salida
         
+def ejec_Switch(inst,TS):
+    valorId = ejec_expresion(inst.id,TS)
+    posDefault=-1
+    contador=-1
+    for i in range(len(inst.listaExpresiones)):
+        exp= ejec_expresion(inst.listaExpresiones[i],TS)
+        if exp==None:
+            posDefault=i
+        elif valorId== exp:
+            contador=i
+
+    TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_Switch")
+    if contador!=-1:
+        for i in range(contador,len(inst.listaInst)):
+            ret_ = ejec_instrucciones(inst.listaInst[i],TablaLocal)
+            
+            if ret_!= None and isinstance(ret_,inst_Break):
+            
+                break
+    elif posDefault!=-1:
+        for i in range(posDefault,len(inst.listaInst)):
+            ret_ = ejec_instrucciones(inst.listaInst[i],TablaLocal)
+            
+            if ret_!= None and isinstance(ret_,inst_Break):
+            
+                break
+
+    TS.salida+= TablaLocal.salida

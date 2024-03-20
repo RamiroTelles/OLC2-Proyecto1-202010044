@@ -19,6 +19,9 @@ reservadas = {
     'else' : 'ELSE',
     'while': 'WHILE',
     'for': 'FOR',
+    'switch': 'SWITCH',
+    'case': 'CASE',
+    'default': "DEFAULT",
     'continue': 'CONTINUE',
     'break': 'BREAK',
     'return': 'RETURN',
@@ -152,6 +155,8 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
+    
+
 def t_error(t):
     listaErrores.append(error("Error lexico del valor" + str(t.value[0]),t.lexer.lineno,t.lexer.lexpos,"lexico"))
     print("Error Léxico '%s'" % t.value[0])
@@ -185,8 +190,39 @@ def p_instruccion(t) :
                         | sFor
                         | sContinue
                         | sBreak
-                        | sReturn'''
+                        | sReturn
+                        | sSwitch'''
     t[0] = t[1]
+
+def p_sSwitch(t):
+    '''sSwitch  : SWITCH PARIZQ op_Ternario PARDER LLAVIZQ listCases LLAVDER'''
+    t[0]= inst_switch(t[3],t[6][0],t[6][1])
+
+def p_listCases1(t):
+    '''listCases    : listCases CASE op_Ternario DOSPUNTOS instrucciones'''
+    t[1][0].append(t[3])
+    t[1][1].append(t[5])
+    t[0]=t[1]
+
+
+def p_listCases2(t):
+    '''listCases    : listCases DEFAULT DOSPUNTOS instrucciones'''
+    t[1][0].append(None)
+    t[1][1].append(t[4])
+    t[0]=t[1]
+    
+
+def p_listCases3(t):
+    '''listCases    : CASE op_Ternario DOSPUNTOS instrucciones
+                    | DEFAULT DOSPUNTOS instrucciones'''
+    if len(t)==5:
+        t[0] = [[t[2]],[t[4]]]
+    elif len(t)==4:
+        t[0] = [[ExpresionNull()],[t[3]]]
+
+    
+
+    
 
 def p_sContinue(t):
     '''sContinue    : CONTINUE PUNTOCOMA'''

@@ -12,3 +12,5 @@ from interfazAreaTexto import interfazAreaTexto
 if __name__ == '__main__':
 
     interfazAreaTexto()
+
+   
