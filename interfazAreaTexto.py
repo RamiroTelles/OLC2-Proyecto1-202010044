@@ -60,19 +60,24 @@ class interfazAreaTexto():
             print("Guardar Archivo")
 
         def analizar():
+            TS = TablaSimbolos()
             texto =t_editor.get("1.0","end")
             #print(texto)
             instrucciones = g.parse(texto)
 
             #print(instrucciones)
-            TS = TablaSimbolos()
+            
             try:
                ejec_instrucciones(instrucciones,TS)
             except Exception as e:
                print("Error",e)
-            
-            crearReporteErroes(g.listaErrores)
+            TS.listaErrores.extend(g.listaErrores)
+            crearReporteErroes(TS.listaErrores)
             crearReporteTablaSimbolos(TS)
+
+            t_console.insert("1.0",TS.salida)
+            TS.limpiar()
+            
 
         
         ventana = Tk()

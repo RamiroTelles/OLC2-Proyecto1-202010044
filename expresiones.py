@@ -55,6 +55,10 @@ class ExpresionID():
     def __init__(self,id):
         self.id= id
 
+class ExpresionNull():
+    def __init__(self):
+        self.tipo= None
+
 
 class ExpresionRelacional():
     def __init__(self,exp1,exp2,operador):

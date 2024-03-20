@@ -1,3 +1,4 @@
+from tipos import TIPOS_P,TIPOS_Simbolos
 
 def crearReporteErroes(listaErrores):
     txt = '''
@@ -55,26 +56,31 @@ def crearReporteTablaSimbolos(ts):
                                 </tr>                
     '''
 
-    for simbol in ts.simbolos:
+    for simbol in ts.simbolos.values():
         txt+= "<tr>"
         txt+= "<td>"+ simbol.id+ "</td>"
-        if simbol.tipo_simbolo == 2:
+        if simbol.tipo_simbolo == TIPOS_Simbolos.FUNCION:
             txt+= "<td> Funcion</td>"
+        elif simbol.tipo_simbolo == TIPOS_Simbolos.CONSTANTE:
+            txt+= "<td> Constante</td>"
         else:
             txt+= "<td> Variable</td>"
-        if simbol.tipo ==1:
+        if simbol.tipo ==TIPOS_P.ENTERO:
             txt+= "<td> Number</td>"
-        elif simbol.tipo==2:
+        elif simbol.tipo==TIPOS_P.FLOAT:
             txt+= "<td> Float</td>"
-        elif simbol.tipo==3:
+        elif simbol.tipo==TIPOS_P.CADENA:
             txt+= "<td> Cadena</td>"
-        elif simbol.tipo==4:
+        elif simbol.tipo==TIPOS_P.BOOLEAN:
             txt+= "<td> Boolean</td>"
-        elif simbol.tipo==5:
+        elif simbol.tipo==TIPOS_P.CHAR:
             txt+= "<td> Char</td>"
-        elif simbol.tipo==6:
+        else:
             txt+= "<td> Void</td>"
-
+        if simbol.valor ==None:
+            txt+= "<td> Null</td>"
+        else:
+            txt+= "<td> "+ str(simbol.valor)+"</td>"
         txt+= "<td>"+ simbol.ambito+ "</td>"
         txt+= "<td>"+ str(simbol.linea)+ "</td>"
         txt+= "<td>"+ str(simbol.columna)+ "</td>"

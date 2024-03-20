@@ -1,8 +1,4 @@
-from enum import Enum
 
-class TIPOS_Simbolos(Enum):
-    VARIABLE=1
-    FUNCION=2
 
 class Simbolos(): #VALOR - NODO
     
@@ -12,6 +8,7 @@ class Simbolos(): #VALOR - NODO
         self.tipo_simbolo =tipo_simbolo
         self.valor = valor
         self.ambito = ambito
+       
         self.instrucciones = instrucciones
         self.parametros = parametros
         self.props = props
@@ -23,6 +20,7 @@ class TablaSimbolos():
     def __init__(self, simbolos = {}, salida='',ambito='global'):
         self.simbolos = simbolos
         self.salida = salida
+        self.listaErrores =[]
         self.ambito= ambito
 
     def agregar(self, simbolo):
@@ -30,12 +28,18 @@ class TablaSimbolos():
 
     def obtener(self, id):
         if not id in self.simbolos:
-            print('Error variable no definida')
+            return None
         else:
             return self.simbolos[id]
     
     def actualizar(self, id, valor):
         if not id in self.simbolos:
-            print('Error variable no definida')
+            return None
         else:
             self.simbolos[id].valor = valor
+
+    def limpiar(self):
+        
+        self.listaErrores.clear()
+        self.simbolos.clear()
+        self.ambito='global'

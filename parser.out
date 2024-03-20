@@ -17,125 +17,135 @@ Rule 2     instrucciones -> instrucciones instruccion
 Rule 3     instrucciones -> instruccion
 Rule 4     instruccion -> imprimir_instr
 Rule 5     instruccion -> declaracion
-Rule 6     declaracion -> VAR ID DOSPUNTOS tipo declaracion_explicita
-Rule 7     declaracion -> VAR ID declaracion_implicita
-Rule 8     declaracion_explicita -> PUNTOCOMA
-Rule 9     declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA
-Rule 10    declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA
-Rule 11    tipo -> NUMBER
-Rule 12    tipo -> FLOAT
-Rule 13    tipo -> STRING
-Rule 14    tipo -> BOOLEAN
-Rule 15    tipo -> CHAR
-Rule 16    imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
-Rule 17    lista_exp -> lista_exp COMA op_Ternario
-Rule 18    lista_exp -> op_Ternario
-Rule 19    op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
-Rule 20    op_Ternario -> exp_Or
-Rule 21    exp_Or -> exp_Or OR exp_And
-Rule 22    exp_Or -> exp_And
-Rule 23    exp_And -> exp_And AND exp_Not
-Rule 24    exp_And -> exp_Not
-Rule 25    exp_Not -> lNot exp_Comp
-Rule 26    exp_Not -> exp_Comp
-Rule 27    lNot -> lNot NOT
-Rule 28    lNot -> NOT
-Rule 29    exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-Rule 30    exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos
-Rule 31    exp_Comp -> exp_rel
-Rule 32    exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos
-Rule 33    exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos
-Rule 34    exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-Rule 35    exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-Rule 36    exp_rel -> exp_Sum_Menos
-Rule 37    exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div
-Rule 38    exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div
-Rule 39    exp_Sum_Menos -> exp_Mul_Div
-Rule 40    exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis
-Rule 41    exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis
-Rule 42    exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis
-Rule 43    exp_Mul_Div -> exp_Parentesis
-Rule 44    exp_Parentesis -> PARIZQ exp_Or PARDER
-Rule 45    exp_Parentesis -> exp_Negativo
-Rule 46    exp_Negativo -> MENOS valor
-Rule 47    exp_Negativo -> valor
-Rule 48    valor -> ENTERO
-Rule 49    valor -> CADENA
-Rule 50    valor -> DECIMAL
-Rule 51    valor -> CARACTER
-Rule 52    valor -> TRUE
-Rule 53    valor -> FALSE
+Rule 6     instruccion -> asignacion
+Rule 7     asignacion -> ID IGUAL op_Ternario PUNTOCOMA
+Rule 8     declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita
+Rule 9     declaracion -> tipoVar ID declaracion_implicita
+Rule 10    declaracion_explicita -> PUNTOCOMA
+Rule 11    declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA
+Rule 12    declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA
+Rule 13    tipoVar -> VAR
+Rule 14    tipoVar -> CONST
+Rule 15    tipo -> NUMBER
+Rule 16    tipo -> FLOAT
+Rule 17    tipo -> STRING
+Rule 18    tipo -> BOOLEAN
+Rule 19    tipo -> CHAR
+Rule 20    imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
+Rule 21    lista_exp -> lista_exp COMA op_Ternario
+Rule 22    lista_exp -> op_Ternario
+Rule 23    op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+Rule 24    op_Ternario -> exp_Or
+Rule 25    exp_Or -> exp_Or OR exp_And
+Rule 26    exp_Or -> exp_And
+Rule 27    exp_And -> exp_And AND exp_Not
+Rule 28    exp_And -> exp_Not
+Rule 29    exp_Not -> lNot exp_Comp
+Rule 30    exp_Not -> exp_Comp
+Rule 31    lNot -> lNot NOT
+Rule 32    lNot -> NOT
+Rule 33    exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+Rule 34    exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos
+Rule 35    exp_Comp -> exp_rel
+Rule 36    exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos
+Rule 37    exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos
+Rule 38    exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+Rule 39    exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+Rule 40    exp_rel -> exp_Sum_Menos
+Rule 41    exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div
+Rule 42    exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div
+Rule 43    exp_Sum_Menos -> exp_Mul_Div
+Rule 44    exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis
+Rule 45    exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis
+Rule 46    exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis
+Rule 47    exp_Mul_Div -> exp_Parentesis
+Rule 48    exp_Parentesis -> PARIZQ exp_Or PARDER
+Rule 49    exp_Parentesis -> exp_Negativo
+Rule 50    exp_Negativo -> MENOS valor
+Rule 51    exp_Negativo -> valor
+Rule 52    valor -> ENTERO
+Rule 53    valor -> CADENA
+Rule 54    valor -> DECIMAL
+Rule 55    valor -> CARACTER
+Rule 56    valor -> TRUE
+Rule 57    valor -> FALSE
+Rule 58    valor -> NULL
+Rule 59    valor -> ID
 
 Terminals, with rules where they appear
 
-AND                  : 23
-BOOLEAN              : 14
-CADENA               : 49
-CARACTER             : 51
-CHAR                 : 15
-COMA                 : 17
+AND                  : 27
+BOOLEAN              : 18
+CADENA               : 53
+CARACTER             : 55
+CHAR                 : 19
+COMA                 : 21
 COMMENTBLOCK         : 
-CONSOLE              : 16
-DECIMAL              : 50
-DISTINTO             : 30
-DIVIDIDO             : 41
-DOSPUNTOS            : 6 19
+CONSOLE              : 20
+CONST                : 14
+DECIMAL              : 54
+DISTINTO             : 34
+DIVIDIDO             : 45
+DOSPUNTOS            : 8 23
 ELSE                 : 
-ENTERO               : 48
-EQUIVALENTE          : 29
-FALSE                : 53
-FLOAT                : 12
+ENTERO               : 52
+EQUIVALENTE          : 33
+FALSE                : 57
+FLOAT                : 16
 FUNCTION             : 
-ID                   : 6 7
+ID                   : 7 8 9 59
 IF                   : 
-IGUAL                : 9 10
+IGUAL                : 7 11 12
 INTERFACE            : 
-INTERROGACION        : 19
+INTERROGACION        : 23
 LET                  : 
-LOG                  : 16
-MAS                  : 37
-MAYOR                : 32
-MAYORIGUAL           : 34
-MENOR                : 33
-MENORIGUAL           : 35
-MENOS                : 38 46
-MODULO               : 42
-NOT                  : 27 28
-NUMBER               : 11
-OR                   : 21
-PARDER               : 16 44
-PARIZQ               : 16 44
-POR                  : 40
-PUNTO                : 16
-PUNTOCOMA            : 8 9 10 16
-STRING               : 13
-TRUE                 : 52
-VAR                  : 6 7
+LOG                  : 20
+MAS                  : 41
+MAYOR                : 36
+MAYORIGUAL           : 38
+MENOR                : 37
+MENORIGUAL           : 39
+MENOS                : 42 50
+MODULO               : 46
+NOT                  : 31 32
+NULL                 : 58
+NUMBER               : 15
+OR                   : 25
+PARDER               : 20 48
+PARIZQ               : 20 48
+POR                  : 44
+PUNTO                : 20
+PUNTOCOMA            : 7 10 11 12 20
+STRING               : 17
+TRUE                 : 56
+VAR                  : 13
 error                : 
 
 Nonterminals, with rules where they appear
 
+asignacion           : 6
 declaracion          : 5
-declaracion_explicita : 6
-declaracion_implicita : 7
-exp_And              : 21 22 23
-exp_Comp             : 25 26
-exp_Mul_Div          : 37 38 39 40 41 42
-exp_Negativo         : 45
-exp_Not              : 23 24
-exp_Or               : 19 19 19 20 21 44
-exp_Parentesis       : 40 41 42 43
-exp_Sum_Menos        : 29 29 30 30 32 32 33 33 34 34 35 35 36 37 38
-exp_rel              : 31
+declaracion_explicita : 8
+declaracion_implicita : 9
+exp_And              : 25 26 27
+exp_Comp             : 29 30
+exp_Mul_Div          : 41 42 43 44 45 46
+exp_Negativo         : 49
+exp_Not              : 27 28
+exp_Or               : 23 23 23 24 25 48
+exp_Parentesis       : 44 45 46 47
+exp_Sum_Menos        : 33 33 34 34 36 36 37 37 38 38 39 39 40 41 42
+exp_rel              : 35
 imprimir_instr       : 4
 init                 : 0
 instruccion          : 2 3
 instrucciones        : 1 2
-lNot                 : 25 27
-lista_exp            : 16 17
-op_Ternario          : 9 10 17 18
-tipo                 : 6
-valor                : 46 47
+lNot                 : 29 31
+lista_exp            : 20 21
+op_Ternario          : 7 11 12 21 22
+tipo                 : 8
+tipoVar              : 8 9
+valor                : 50 51
 
 Parsing method: LALR
 
@@ -147,18 +157,26 @@ state 0
     (3) instrucciones -> . instruccion
     (4) instruccion -> . imprimir_instr
     (5) instruccion -> . declaracion
-    (16) imprimir_instr -> . CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
-    (6) declaracion -> . VAR ID DOSPUNTOS tipo declaracion_explicita
-    (7) declaracion -> . VAR ID declaracion_implicita
+    (6) instruccion -> . asignacion
+    (20) imprimir_instr -> . CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
+    (8) declaracion -> . tipoVar ID DOSPUNTOS tipo declaracion_explicita
+    (9) declaracion -> . tipoVar ID declaracion_implicita
+    (7) asignacion -> . ID IGUAL op_Ternario PUNTOCOMA
+    (13) tipoVar -> . VAR
+    (14) tipoVar -> . CONST
 
-    CONSOLE         shift and go to state 6
-    VAR             shift and go to state 7
+    CONSOLE         shift and go to state 7
+    ID              shift and go to state 9
+    VAR             shift and go to state 10
+    CONST           shift and go to state 11
 
     init                           shift and go to state 1
     instrucciones                  shift and go to state 2
     instruccion                    shift and go to state 3
     imprimir_instr                 shift and go to state 4
     declaracion                    shift and go to state 5
+    asignacion                     shift and go to state 6
+    tipoVar                        shift and go to state 8
 
 state 1
 
@@ -172,24 +190,34 @@ state 2
     (2) instrucciones -> instrucciones . instruccion
     (4) instruccion -> . imprimir_instr
     (5) instruccion -> . declaracion
-    (16) imprimir_instr -> . CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
-    (6) declaracion -> . VAR ID DOSPUNTOS tipo declaracion_explicita
-    (7) declaracion -> . VAR ID declaracion_implicita
+    (6) instruccion -> . asignacion
+    (20) imprimir_instr -> . CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
+    (8) declaracion -> . tipoVar ID DOSPUNTOS tipo declaracion_explicita
+    (9) declaracion -> . tipoVar ID declaracion_implicita
+    (7) asignacion -> . ID IGUAL op_Ternario PUNTOCOMA
+    (13) tipoVar -> . VAR
+    (14) tipoVar -> . CONST
 
     $end            reduce using rule 1 (init -> instrucciones .)
-    CONSOLE         shift and go to state 6
-    VAR             shift and go to state 7
+    CONSOLE         shift and go to state 7
+    ID              shift and go to state 9
+    VAR             shift and go to state 10
+    CONST           shift and go to state 11
 
-    instruccion                    shift and go to state 8
+    instruccion                    shift and go to state 12
     imprimir_instr                 shift and go to state 4
     declaracion                    shift and go to state 5
+    asignacion                     shift and go to state 6
+    tipoVar                        shift and go to state 8
 
 state 3
 
     (3) instrucciones -> instruccion .
 
     CONSOLE         reduce using rule 3 (instrucciones -> instruccion .)
+    ID              reduce using rule 3 (instrucciones -> instruccion .)
     VAR             reduce using rule 3 (instrucciones -> instruccion .)
+    CONST           reduce using rule 3 (instrucciones -> instruccion .)
     $end            reduce using rule 3 (instrucciones -> instruccion .)
 
 
@@ -198,7 +226,9 @@ state 4
     (4) instruccion -> imprimir_instr .
 
     CONSOLE         reduce using rule 4 (instruccion -> imprimir_instr .)
+    ID              reduce using rule 4 (instruccion -> imprimir_instr .)
     VAR             reduce using rule 4 (instruccion -> imprimir_instr .)
+    CONST           reduce using rule 4 (instruccion -> imprimir_instr .)
     $end            reduce using rule 4 (instruccion -> imprimir_instr .)
 
 
@@ -207,1901 +237,2173 @@ state 5
     (5) instruccion -> declaracion .
 
     CONSOLE         reduce using rule 5 (instruccion -> declaracion .)
+    ID              reduce using rule 5 (instruccion -> declaracion .)
     VAR             reduce using rule 5 (instruccion -> declaracion .)
+    CONST           reduce using rule 5 (instruccion -> declaracion .)
     $end            reduce using rule 5 (instruccion -> declaracion .)
 
 
 state 6
 
-    (16) imprimir_instr -> CONSOLE . PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
+    (6) instruccion -> asignacion .
 
-    PUNTO           shift and go to state 9
+    CONSOLE         reduce using rule 6 (instruccion -> asignacion .)
+    ID              reduce using rule 6 (instruccion -> asignacion .)
+    VAR             reduce using rule 6 (instruccion -> asignacion .)
+    CONST           reduce using rule 6 (instruccion -> asignacion .)
+    $end            reduce using rule 6 (instruccion -> asignacion .)
 
 
 state 7
 
-    (6) declaracion -> VAR . ID DOSPUNTOS tipo declaracion_explicita
-    (7) declaracion -> VAR . ID declaracion_implicita
+    (20) imprimir_instr -> CONSOLE . PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA
 
-    ID              shift and go to state 10
+    PUNTO           shift and go to state 13
 
 
 state 8
 
-    (2) instrucciones -> instrucciones instruccion .
+    (8) declaracion -> tipoVar . ID DOSPUNTOS tipo declaracion_explicita
+    (9) declaracion -> tipoVar . ID declaracion_implicita
 
-    CONSOLE         reduce using rule 2 (instrucciones -> instrucciones instruccion .)
-    VAR             reduce using rule 2 (instrucciones -> instrucciones instruccion .)
-    $end            reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    ID              shift and go to state 14
 
 
 state 9
 
-    (16) imprimir_instr -> CONSOLE PUNTO . LOG PARIZQ lista_exp PARDER PUNTOCOMA
+    (7) asignacion -> ID . IGUAL op_Ternario PUNTOCOMA
 
-    LOG             shift and go to state 11
+    IGUAL           shift and go to state 15
 
 
 state 10
 
-    (6) declaracion -> VAR ID . DOSPUNTOS tipo declaracion_explicita
-    (7) declaracion -> VAR ID . declaracion_implicita
-    (10) declaracion_implicita -> . IGUAL op_Ternario PUNTOCOMA
+    (13) tipoVar -> VAR .
 
-    DOSPUNTOS       shift and go to state 12
-    IGUAL           shift and go to state 14
+    ID              reduce using rule 13 (tipoVar -> VAR .)
 
-    declaracion_implicita          shift and go to state 13
 
 state 11
 
-    (16) imprimir_instr -> CONSOLE PUNTO LOG . PARIZQ lista_exp PARDER PUNTOCOMA
+    (14) tipoVar -> CONST .
 
-    PARIZQ          shift and go to state 15
+    ID              reduce using rule 14 (tipoVar -> CONST .)
 
 
 state 12
 
-    (6) declaracion -> VAR ID DOSPUNTOS . tipo declaracion_explicita
-    (11) tipo -> . NUMBER
-    (12) tipo -> . FLOAT
-    (13) tipo -> . STRING
-    (14) tipo -> . BOOLEAN
-    (15) tipo -> . CHAR
+    (2) instrucciones -> instrucciones instruccion .
 
-    NUMBER          shift and go to state 17
-    FLOAT           shift and go to state 18
-    STRING          shift and go to state 19
-    BOOLEAN         shift and go to state 20
-    CHAR            shift and go to state 21
+    CONSOLE         reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    ID              reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    VAR             reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    CONST           reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    $end            reduce using rule 2 (instrucciones -> instrucciones instruccion .)
 
-    tipo                           shift and go to state 16
 
 state 13
 
-    (7) declaracion -> VAR ID declaracion_implicita .
+    (20) imprimir_instr -> CONSOLE PUNTO . LOG PARIZQ lista_exp PARDER PUNTOCOMA
 
-    CONSOLE         reduce using rule 7 (declaracion -> VAR ID declaracion_implicita .)
-    VAR             reduce using rule 7 (declaracion -> VAR ID declaracion_implicita .)
-    $end            reduce using rule 7 (declaracion -> VAR ID declaracion_implicita .)
+    LOG             shift and go to state 16
 
 
 state 14
 
-    (10) declaracion_implicita -> IGUAL . op_Ternario PUNTOCOMA
-    (19) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
-    (20) op_Ternario -> . exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (8) declaracion -> tipoVar ID . DOSPUNTOS tipo declaracion_explicita
+    (9) declaracion -> tipoVar ID . declaracion_implicita
+    (12) declaracion_implicita -> . IGUAL op_Ternario PUNTOCOMA
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    DOSPUNTOS       shift and go to state 17
+    IGUAL           shift and go to state 19
 
-    op_Ternario                    shift and go to state 22
-    exp_Or                         shift and go to state 23
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    declaracion_implicita          shift and go to state 18
 
 state 15
 
-    (16) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ . lista_exp PARDER PUNTOCOMA
-    (17) lista_exp -> . lista_exp COMA op_Ternario
-    (18) lista_exp -> . op_Ternario
-    (19) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
-    (20) op_Ternario -> . exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (7) asignacion -> ID IGUAL . op_Ternario PUNTOCOMA
+    (23) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    lista_exp                      shift and go to state 43
-    op_Ternario                    shift and go to state 44
-    exp_Or                         shift and go to state 23
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    op_Ternario                    shift and go to state 21
+    exp_Or                         shift and go to state 22
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 16
 
-    (6) declaracion -> VAR ID DOSPUNTOS tipo . declaracion_explicita
-    (8) declaracion_explicita -> . PUNTOCOMA
-    (9) declaracion_explicita -> . IGUAL op_Ternario PUNTOCOMA
+    (20) imprimir_instr -> CONSOLE PUNTO LOG . PARIZQ lista_exp PARDER PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 46
-    IGUAL           shift and go to state 47
+    PARIZQ          shift and go to state 43
 
-    declaracion_explicita          shift and go to state 45
 
 state 17
 
-    (11) tipo -> NUMBER .
+    (8) declaracion -> tipoVar ID DOSPUNTOS . tipo declaracion_explicita
+    (15) tipo -> . NUMBER
+    (16) tipo -> . FLOAT
+    (17) tipo -> . STRING
+    (18) tipo -> . BOOLEAN
+    (19) tipo -> . CHAR
 
-    PUNTOCOMA       reduce using rule 11 (tipo -> NUMBER .)
-    IGUAL           reduce using rule 11 (tipo -> NUMBER .)
+    NUMBER          shift and go to state 45
+    FLOAT           shift and go to state 46
+    STRING          shift and go to state 47
+    BOOLEAN         shift and go to state 48
+    CHAR            shift and go to state 49
 
+    tipo                           shift and go to state 44
 
 state 18
 
-    (12) tipo -> FLOAT .
+    (9) declaracion -> tipoVar ID declaracion_implicita .
 
-    PUNTOCOMA       reduce using rule 12 (tipo -> FLOAT .)
-    IGUAL           reduce using rule 12 (tipo -> FLOAT .)
+    CONSOLE         reduce using rule 9 (declaracion -> tipoVar ID declaracion_implicita .)
+    ID              reduce using rule 9 (declaracion -> tipoVar ID declaracion_implicita .)
+    VAR             reduce using rule 9 (declaracion -> tipoVar ID declaracion_implicita .)
+    CONST           reduce using rule 9 (declaracion -> tipoVar ID declaracion_implicita .)
+    $end            reduce using rule 9 (declaracion -> tipoVar ID declaracion_implicita .)
 
 
 state 19
 
-    (13) tipo -> STRING .
+    (12) declaracion_implicita -> IGUAL . op_Ternario PUNTOCOMA
+    (23) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PUNTOCOMA       reduce using rule 13 (tipo -> STRING .)
-    IGUAL           reduce using rule 13 (tipo -> STRING .)
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    op_Ternario                    shift and go to state 50
+    exp_Or                         shift and go to state 22
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 20
 
-    (14) tipo -> BOOLEAN .
+    (59) valor -> ID .
 
-    PUNTOCOMA       reduce using rule 14 (tipo -> BOOLEAN .)
-    IGUAL           reduce using rule 14 (tipo -> BOOLEAN .)
+    POR             reduce using rule 59 (valor -> ID .)
+    DIVIDIDO        reduce using rule 59 (valor -> ID .)
+    MODULO          reduce using rule 59 (valor -> ID .)
+    EQUIVALENTE     reduce using rule 59 (valor -> ID .)
+    DISTINTO        reduce using rule 59 (valor -> ID .)
+    MAS             reduce using rule 59 (valor -> ID .)
+    MENOS           reduce using rule 59 (valor -> ID .)
+    MAYOR           reduce using rule 59 (valor -> ID .)
+    MENOR           reduce using rule 59 (valor -> ID .)
+    MAYORIGUAL      reduce using rule 59 (valor -> ID .)
+    MENORIGUAL      reduce using rule 59 (valor -> ID .)
+    AND             reduce using rule 59 (valor -> ID .)
+    INTERROGACION   reduce using rule 59 (valor -> ID .)
+    OR              reduce using rule 59 (valor -> ID .)
+    PUNTOCOMA       reduce using rule 59 (valor -> ID .)
+    PARDER          reduce using rule 59 (valor -> ID .)
+    COMA            reduce using rule 59 (valor -> ID .)
+    DOSPUNTOS       reduce using rule 59 (valor -> ID .)
 
 
 state 21
 
-    (15) tipo -> CHAR .
+    (7) asignacion -> ID IGUAL op_Ternario . PUNTOCOMA
 
-    PUNTOCOMA       reduce using rule 15 (tipo -> CHAR .)
-    IGUAL           reduce using rule 15 (tipo -> CHAR .)
+    PUNTOCOMA       shift and go to state 51
 
 
 state 22
 
-    (10) declaracion_implicita -> IGUAL op_Ternario . PUNTOCOMA
+    (23) op_Ternario -> exp_Or . INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> exp_Or .
+    (25) exp_Or -> exp_Or . OR exp_And
 
-    PUNTOCOMA       shift and go to state 48
+    INTERROGACION   shift and go to state 52
+    PUNTOCOMA       reduce using rule 24 (op_Ternario -> exp_Or .)
+    PARDER          reduce using rule 24 (op_Ternario -> exp_Or .)
+    COMA            reduce using rule 24 (op_Ternario -> exp_Or .)
+    OR              shift and go to state 53
 
 
 state 23
 
-    (19) op_Ternario -> exp_Or . INTERROGACION exp_Or DOSPUNTOS exp_Or
-    (20) op_Ternario -> exp_Or .
-    (21) exp_Or -> exp_Or . OR exp_And
+    (26) exp_Or -> exp_And .
+    (27) exp_And -> exp_And . AND exp_Not
 
-    INTERROGACION   shift and go to state 49
-    PUNTOCOMA       reduce using rule 20 (op_Ternario -> exp_Or .)
-    PARDER          reduce using rule 20 (op_Ternario -> exp_Or .)
-    COMA            reduce using rule 20 (op_Ternario -> exp_Or .)
-    OR              shift and go to state 50
+    INTERROGACION   reduce using rule 26 (exp_Or -> exp_And .)
+    OR              reduce using rule 26 (exp_Or -> exp_And .)
+    PUNTOCOMA       reduce using rule 26 (exp_Or -> exp_And .)
+    PARDER          reduce using rule 26 (exp_Or -> exp_And .)
+    COMA            reduce using rule 26 (exp_Or -> exp_And .)
+    DOSPUNTOS       reduce using rule 26 (exp_Or -> exp_And .)
+    AND             shift and go to state 54
 
 
 state 24
 
-    (22) exp_Or -> exp_And .
-    (23) exp_And -> exp_And . AND exp_Not
+    (28) exp_And -> exp_Not .
 
-    INTERROGACION   reduce using rule 22 (exp_Or -> exp_And .)
-    OR              reduce using rule 22 (exp_Or -> exp_And .)
-    PUNTOCOMA       reduce using rule 22 (exp_Or -> exp_And .)
-    PARDER          reduce using rule 22 (exp_Or -> exp_And .)
-    COMA            reduce using rule 22 (exp_Or -> exp_And .)
-    DOSPUNTOS       reduce using rule 22 (exp_Or -> exp_And .)
-    AND             shift and go to state 51
+    AND             reduce using rule 28 (exp_And -> exp_Not .)
+    INTERROGACION   reduce using rule 28 (exp_And -> exp_Not .)
+    OR              reduce using rule 28 (exp_And -> exp_Not .)
+    PUNTOCOMA       reduce using rule 28 (exp_And -> exp_Not .)
+    PARDER          reduce using rule 28 (exp_And -> exp_Not .)
+    COMA            reduce using rule 28 (exp_And -> exp_Not .)
+    DOSPUNTOS       reduce using rule 28 (exp_And -> exp_Not .)
 
 
 state 25
 
-    (24) exp_And -> exp_Not .
+    (29) exp_Not -> lNot . exp_Comp
+    (31) lNot -> lNot . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    AND             reduce using rule 24 (exp_And -> exp_Not .)
-    INTERROGACION   reduce using rule 24 (exp_And -> exp_Not .)
-    OR              reduce using rule 24 (exp_And -> exp_Not .)
-    PUNTOCOMA       reduce using rule 24 (exp_And -> exp_Not .)
-    PARDER          reduce using rule 24 (exp_And -> exp_Not .)
-    COMA            reduce using rule 24 (exp_And -> exp_Not .)
-    DOSPUNTOS       reduce using rule 24 (exp_And -> exp_Not .)
+    NOT             shift and go to state 56
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Comp                       shift and go to state 55
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 26
 
-    (25) exp_Not -> lNot . exp_Comp
-    (27) lNot -> lNot . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (30) exp_Not -> exp_Comp .
 
-    NOT             shift and go to state 53
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    AND             reduce using rule 30 (exp_Not -> exp_Comp .)
+    INTERROGACION   reduce using rule 30 (exp_Not -> exp_Comp .)
+    OR              reduce using rule 30 (exp_Not -> exp_Comp .)
+    PUNTOCOMA       reduce using rule 30 (exp_Not -> exp_Comp .)
+    PARDER          reduce using rule 30 (exp_Not -> exp_Comp .)
+    COMA            reduce using rule 30 (exp_Not -> exp_Comp .)
+    DOSPUNTOS       reduce using rule 30 (exp_Not -> exp_Comp .)
 
-    exp_Comp                       shift and go to state 52
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 27
 
-    (26) exp_Not -> exp_Comp .
+    (32) lNot -> NOT .
 
-    AND             reduce using rule 26 (exp_Not -> exp_Comp .)
-    INTERROGACION   reduce using rule 26 (exp_Not -> exp_Comp .)
-    OR              reduce using rule 26 (exp_Not -> exp_Comp .)
-    PUNTOCOMA       reduce using rule 26 (exp_Not -> exp_Comp .)
-    PARDER          reduce using rule 26 (exp_Not -> exp_Comp .)
-    COMA            reduce using rule 26 (exp_Not -> exp_Comp .)
-    DOSPUNTOS       reduce using rule 26 (exp_Not -> exp_Comp .)
+    NOT             reduce using rule 32 (lNot -> NOT .)
+    PARIZQ          reduce using rule 32 (lNot -> NOT .)
+    MENOS           reduce using rule 32 (lNot -> NOT .)
+    ENTERO          reduce using rule 32 (lNot -> NOT .)
+    CADENA          reduce using rule 32 (lNot -> NOT .)
+    DECIMAL         reduce using rule 32 (lNot -> NOT .)
+    CARACTER        reduce using rule 32 (lNot -> NOT .)
+    TRUE            reduce using rule 32 (lNot -> NOT .)
+    FALSE           reduce using rule 32 (lNot -> NOT .)
+    NULL            reduce using rule 32 (lNot -> NOT .)
+    ID              reduce using rule 32 (lNot -> NOT .)
 
 
 state 28
 
-    (28) lNot -> NOT .
+    (33) exp_Comp -> exp_Sum_Menos . EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> exp_Sum_Menos . DISTINTO exp_Sum_Menos
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (36) exp_rel -> exp_Sum_Menos . MAYOR exp_Sum_Menos
+    (37) exp_rel -> exp_Sum_Menos . MENOR exp_Sum_Menos
+    (38) exp_rel -> exp_Sum_Menos . MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> exp_Sum_Menos . MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> exp_Sum_Menos .
 
-    NOT             reduce using rule 28 (lNot -> NOT .)
-    PARIZQ          reduce using rule 28 (lNot -> NOT .)
-    MENOS           reduce using rule 28 (lNot -> NOT .)
-    ENTERO          reduce using rule 28 (lNot -> NOT .)
-    CADENA          reduce using rule 28 (lNot -> NOT .)
-    DECIMAL         reduce using rule 28 (lNot -> NOT .)
-    CARACTER        reduce using rule 28 (lNot -> NOT .)
-    TRUE            reduce using rule 28 (lNot -> NOT .)
-    FALSE           reduce using rule 28 (lNot -> NOT .)
+    EQUIVALENTE     shift and go to state 57
+    DISTINTO        shift and go to state 58
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
+    MAYOR           shift and go to state 61
+    MENOR           shift and go to state 62
+    MAYORIGUAL      shift and go to state 63
+    MENORIGUAL      shift and go to state 64
+    AND             reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    OR              reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    PARDER          reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    COMA            reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 40 (exp_rel -> exp_Sum_Menos .)
 
 
 state 29
 
-    (29) exp_Comp -> exp_Sum_Menos . EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> exp_Sum_Menos . DISTINTO exp_Sum_Menos
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
-    (32) exp_rel -> exp_Sum_Menos . MAYOR exp_Sum_Menos
-    (33) exp_rel -> exp_Sum_Menos . MENOR exp_Sum_Menos
-    (34) exp_rel -> exp_Sum_Menos . MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> exp_Sum_Menos . MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> exp_Sum_Menos .
+    (35) exp_Comp -> exp_rel .
 
-    EQUIVALENTE     shift and go to state 54
-    DISTINTO        shift and go to state 55
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
-    MAYOR           shift and go to state 58
-    MENOR           shift and go to state 59
-    MAYORIGUAL      shift and go to state 60
-    MENORIGUAL      shift and go to state 61
-    AND             reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    OR              reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    PARDER          reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    COMA            reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 36 (exp_rel -> exp_Sum_Menos .)
+    AND             reduce using rule 35 (exp_Comp -> exp_rel .)
+    INTERROGACION   reduce using rule 35 (exp_Comp -> exp_rel .)
+    OR              reduce using rule 35 (exp_Comp -> exp_rel .)
+    PUNTOCOMA       reduce using rule 35 (exp_Comp -> exp_rel .)
+    PARDER          reduce using rule 35 (exp_Comp -> exp_rel .)
+    COMA            reduce using rule 35 (exp_Comp -> exp_rel .)
+    DOSPUNTOS       reduce using rule 35 (exp_Comp -> exp_rel .)
 
 
 state 30
 
-    (31) exp_Comp -> exp_rel .
+    (43) exp_Sum_Menos -> exp_Mul_Div .
+    (44) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
+    (45) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
 
-    AND             reduce using rule 31 (exp_Comp -> exp_rel .)
-    INTERROGACION   reduce using rule 31 (exp_Comp -> exp_rel .)
-    OR              reduce using rule 31 (exp_Comp -> exp_rel .)
-    PUNTOCOMA       reduce using rule 31 (exp_Comp -> exp_rel .)
-    PARDER          reduce using rule 31 (exp_Comp -> exp_rel .)
-    COMA            reduce using rule 31 (exp_Comp -> exp_rel .)
-    DOSPUNTOS       reduce using rule 31 (exp_Comp -> exp_rel .)
+    EQUIVALENTE     reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    DISTINTO        reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MAS             reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MENOS           reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MAYOR           reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MENOR           reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MAYORIGUAL      reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    MENORIGUAL      reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    AND             reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    INTERROGACION   reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    OR              reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    PUNTOCOMA       reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    PARDER          reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    COMA            reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    DOSPUNTOS       reduce using rule 43 (exp_Sum_Menos -> exp_Mul_Div .)
+    POR             shift and go to state 65
+    DIVIDIDO        shift and go to state 66
+    MODULO          shift and go to state 67
 
 
 state 31
 
-    (39) exp_Sum_Menos -> exp_Mul_Div .
-    (40) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
-    (41) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
+    (50) exp_Negativo -> MENOS . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    EQUIVALENTE     reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    DISTINTO        reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MAS             reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MENOS           reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MAYOR           reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MENOR           reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MAYORIGUAL      reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    MENORIGUAL      reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    AND             reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    INTERROGACION   reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    OR              reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    PUNTOCOMA       reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    PARDER          reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    COMA            reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    DOSPUNTOS       reduce using rule 39 (exp_Sum_Menos -> exp_Mul_Div .)
-    POR             shift and go to state 62
-    DIVIDIDO        shift and go to state 63
-    MODULO          shift and go to state 64
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    valor                          shift and go to state 68
 
 state 32
 
-    (46) exp_Negativo -> MENOS . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (47) exp_Mul_Div -> exp_Parentesis .
 
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    POR             reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    DIVIDIDO        reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MODULO          reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    DISTINTO        reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MAS             reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MENOS           reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MAYOR           reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MENOR           reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MAYORIGUAL      reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    MENORIGUAL      reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    AND             reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    INTERROGACION   reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    OR              reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    PUNTOCOMA       reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    PARDER          reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    COMA            reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
+    DOSPUNTOS       reduce using rule 47 (exp_Mul_Div -> exp_Parentesis .)
 
-    valor                          shift and go to state 65
 
 state 33
 
-    (43) exp_Mul_Div -> exp_Parentesis .
+    (48) exp_Parentesis -> PARIZQ . exp_Or PARDER
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    POR             reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    DIVIDIDO        reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MODULO          reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    EQUIVALENTE     reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    DISTINTO        reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MAS             reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MENOS           reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MAYOR           reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MENOR           reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MAYORIGUAL      reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    MENORIGUAL      reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    AND             reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    INTERROGACION   reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    OR              reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    PUNTOCOMA       reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    PARDER          reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    COMA            reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
-    DOSPUNTOS       reduce using rule 43 (exp_Mul_Div -> exp_Parentesis .)
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Or                         shift and go to state 69
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 34
 
-    (44) exp_Parentesis -> PARIZQ . exp_Or PARDER
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (49) exp_Parentesis -> exp_Negativo .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    POR             reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    DIVIDIDO        reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MODULO          reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    EQUIVALENTE     reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    DISTINTO        reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MAS             reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MENOS           reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MAYOR           reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MENOR           reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MAYORIGUAL      reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    MENORIGUAL      reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    AND             reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    INTERROGACION   reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    OR              reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    PUNTOCOMA       reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    PARDER          reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    COMA            reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
+    DOSPUNTOS       reduce using rule 49 (exp_Parentesis -> exp_Negativo .)
 
-    exp_Or                         shift and go to state 66
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 35
 
-    (45) exp_Parentesis -> exp_Negativo .
+    (51) exp_Negativo -> valor .
 
-    POR             reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    DIVIDIDO        reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MODULO          reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    EQUIVALENTE     reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    DISTINTO        reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MAS             reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MENOS           reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MAYOR           reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MENOR           reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MAYORIGUAL      reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    MENORIGUAL      reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    AND             reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    INTERROGACION   reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    OR              reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    PUNTOCOMA       reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    PARDER          reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    COMA            reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
-    DOSPUNTOS       reduce using rule 45 (exp_Parentesis -> exp_Negativo .)
+    POR             reduce using rule 51 (exp_Negativo -> valor .)
+    DIVIDIDO        reduce using rule 51 (exp_Negativo -> valor .)
+    MODULO          reduce using rule 51 (exp_Negativo -> valor .)
+    EQUIVALENTE     reduce using rule 51 (exp_Negativo -> valor .)
+    DISTINTO        reduce using rule 51 (exp_Negativo -> valor .)
+    MAS             reduce using rule 51 (exp_Negativo -> valor .)
+    MENOS           reduce using rule 51 (exp_Negativo -> valor .)
+    MAYOR           reduce using rule 51 (exp_Negativo -> valor .)
+    MENOR           reduce using rule 51 (exp_Negativo -> valor .)
+    MAYORIGUAL      reduce using rule 51 (exp_Negativo -> valor .)
+    MENORIGUAL      reduce using rule 51 (exp_Negativo -> valor .)
+    AND             reduce using rule 51 (exp_Negativo -> valor .)
+    INTERROGACION   reduce using rule 51 (exp_Negativo -> valor .)
+    OR              reduce using rule 51 (exp_Negativo -> valor .)
+    PUNTOCOMA       reduce using rule 51 (exp_Negativo -> valor .)
+    PARDER          reduce using rule 51 (exp_Negativo -> valor .)
+    COMA            reduce using rule 51 (exp_Negativo -> valor .)
+    DOSPUNTOS       reduce using rule 51 (exp_Negativo -> valor .)
 
 
 state 36
 
-    (47) exp_Negativo -> valor .
+    (52) valor -> ENTERO .
 
-    POR             reduce using rule 47 (exp_Negativo -> valor .)
-    DIVIDIDO        reduce using rule 47 (exp_Negativo -> valor .)
-    MODULO          reduce using rule 47 (exp_Negativo -> valor .)
-    EQUIVALENTE     reduce using rule 47 (exp_Negativo -> valor .)
-    DISTINTO        reduce using rule 47 (exp_Negativo -> valor .)
-    MAS             reduce using rule 47 (exp_Negativo -> valor .)
-    MENOS           reduce using rule 47 (exp_Negativo -> valor .)
-    MAYOR           reduce using rule 47 (exp_Negativo -> valor .)
-    MENOR           reduce using rule 47 (exp_Negativo -> valor .)
-    MAYORIGUAL      reduce using rule 47 (exp_Negativo -> valor .)
-    MENORIGUAL      reduce using rule 47 (exp_Negativo -> valor .)
-    AND             reduce using rule 47 (exp_Negativo -> valor .)
-    INTERROGACION   reduce using rule 47 (exp_Negativo -> valor .)
-    OR              reduce using rule 47 (exp_Negativo -> valor .)
-    PUNTOCOMA       reduce using rule 47 (exp_Negativo -> valor .)
-    PARDER          reduce using rule 47 (exp_Negativo -> valor .)
-    COMA            reduce using rule 47 (exp_Negativo -> valor .)
-    DOSPUNTOS       reduce using rule 47 (exp_Negativo -> valor .)
+    POR             reduce using rule 52 (valor -> ENTERO .)
+    DIVIDIDO        reduce using rule 52 (valor -> ENTERO .)
+    MODULO          reduce using rule 52 (valor -> ENTERO .)
+    EQUIVALENTE     reduce using rule 52 (valor -> ENTERO .)
+    DISTINTO        reduce using rule 52 (valor -> ENTERO .)
+    MAS             reduce using rule 52 (valor -> ENTERO .)
+    MENOS           reduce using rule 52 (valor -> ENTERO .)
+    MAYOR           reduce using rule 52 (valor -> ENTERO .)
+    MENOR           reduce using rule 52 (valor -> ENTERO .)
+    MAYORIGUAL      reduce using rule 52 (valor -> ENTERO .)
+    MENORIGUAL      reduce using rule 52 (valor -> ENTERO .)
+    AND             reduce using rule 52 (valor -> ENTERO .)
+    INTERROGACION   reduce using rule 52 (valor -> ENTERO .)
+    OR              reduce using rule 52 (valor -> ENTERO .)
+    PUNTOCOMA       reduce using rule 52 (valor -> ENTERO .)
+    PARDER          reduce using rule 52 (valor -> ENTERO .)
+    COMA            reduce using rule 52 (valor -> ENTERO .)
+    DOSPUNTOS       reduce using rule 52 (valor -> ENTERO .)
 
 
 state 37
 
-    (48) valor -> ENTERO .
+    (53) valor -> CADENA .
 
-    POR             reduce using rule 48 (valor -> ENTERO .)
-    DIVIDIDO        reduce using rule 48 (valor -> ENTERO .)
-    MODULO          reduce using rule 48 (valor -> ENTERO .)
-    EQUIVALENTE     reduce using rule 48 (valor -> ENTERO .)
-    DISTINTO        reduce using rule 48 (valor -> ENTERO .)
-    MAS             reduce using rule 48 (valor -> ENTERO .)
-    MENOS           reduce using rule 48 (valor -> ENTERO .)
-    MAYOR           reduce using rule 48 (valor -> ENTERO .)
-    MENOR           reduce using rule 48 (valor -> ENTERO .)
-    MAYORIGUAL      reduce using rule 48 (valor -> ENTERO .)
-    MENORIGUAL      reduce using rule 48 (valor -> ENTERO .)
-    AND             reduce using rule 48 (valor -> ENTERO .)
-    INTERROGACION   reduce using rule 48 (valor -> ENTERO .)
-    OR              reduce using rule 48 (valor -> ENTERO .)
-    PUNTOCOMA       reduce using rule 48 (valor -> ENTERO .)
-    PARDER          reduce using rule 48 (valor -> ENTERO .)
-    COMA            reduce using rule 48 (valor -> ENTERO .)
-    DOSPUNTOS       reduce using rule 48 (valor -> ENTERO .)
+    POR             reduce using rule 53 (valor -> CADENA .)
+    DIVIDIDO        reduce using rule 53 (valor -> CADENA .)
+    MODULO          reduce using rule 53 (valor -> CADENA .)
+    EQUIVALENTE     reduce using rule 53 (valor -> CADENA .)
+    DISTINTO        reduce using rule 53 (valor -> CADENA .)
+    MAS             reduce using rule 53 (valor -> CADENA .)
+    MENOS           reduce using rule 53 (valor -> CADENA .)
+    MAYOR           reduce using rule 53 (valor -> CADENA .)
+    MENOR           reduce using rule 53 (valor -> CADENA .)
+    MAYORIGUAL      reduce using rule 53 (valor -> CADENA .)
+    MENORIGUAL      reduce using rule 53 (valor -> CADENA .)
+    AND             reduce using rule 53 (valor -> CADENA .)
+    INTERROGACION   reduce using rule 53 (valor -> CADENA .)
+    OR              reduce using rule 53 (valor -> CADENA .)
+    PUNTOCOMA       reduce using rule 53 (valor -> CADENA .)
+    PARDER          reduce using rule 53 (valor -> CADENA .)
+    COMA            reduce using rule 53 (valor -> CADENA .)
+    DOSPUNTOS       reduce using rule 53 (valor -> CADENA .)
 
 
 state 38
 
-    (49) valor -> CADENA .
+    (54) valor -> DECIMAL .
 
-    POR             reduce using rule 49 (valor -> CADENA .)
-    DIVIDIDO        reduce using rule 49 (valor -> CADENA .)
-    MODULO          reduce using rule 49 (valor -> CADENA .)
-    EQUIVALENTE     reduce using rule 49 (valor -> CADENA .)
-    DISTINTO        reduce using rule 49 (valor -> CADENA .)
-    MAS             reduce using rule 49 (valor -> CADENA .)
-    MENOS           reduce using rule 49 (valor -> CADENA .)
-    MAYOR           reduce using rule 49 (valor -> CADENA .)
-    MENOR           reduce using rule 49 (valor -> CADENA .)
-    MAYORIGUAL      reduce using rule 49 (valor -> CADENA .)
-    MENORIGUAL      reduce using rule 49 (valor -> CADENA .)
-    AND             reduce using rule 49 (valor -> CADENA .)
-    INTERROGACION   reduce using rule 49 (valor -> CADENA .)
-    OR              reduce using rule 49 (valor -> CADENA .)
-    PUNTOCOMA       reduce using rule 49 (valor -> CADENA .)
-    PARDER          reduce using rule 49 (valor -> CADENA .)
-    COMA            reduce using rule 49 (valor -> CADENA .)
-    DOSPUNTOS       reduce using rule 49 (valor -> CADENA .)
+    POR             reduce using rule 54 (valor -> DECIMAL .)
+    DIVIDIDO        reduce using rule 54 (valor -> DECIMAL .)
+    MODULO          reduce using rule 54 (valor -> DECIMAL .)
+    EQUIVALENTE     reduce using rule 54 (valor -> DECIMAL .)
+    DISTINTO        reduce using rule 54 (valor -> DECIMAL .)
+    MAS             reduce using rule 54 (valor -> DECIMAL .)
+    MENOS           reduce using rule 54 (valor -> DECIMAL .)
+    MAYOR           reduce using rule 54 (valor -> DECIMAL .)
+    MENOR           reduce using rule 54 (valor -> DECIMAL .)
+    MAYORIGUAL      reduce using rule 54 (valor -> DECIMAL .)
+    MENORIGUAL      reduce using rule 54 (valor -> DECIMAL .)
+    AND             reduce using rule 54 (valor -> DECIMAL .)
+    INTERROGACION   reduce using rule 54 (valor -> DECIMAL .)
+    OR              reduce using rule 54 (valor -> DECIMAL .)
+    PUNTOCOMA       reduce using rule 54 (valor -> DECIMAL .)
+    PARDER          reduce using rule 54 (valor -> DECIMAL .)
+    COMA            reduce using rule 54 (valor -> DECIMAL .)
+    DOSPUNTOS       reduce using rule 54 (valor -> DECIMAL .)
 
 
 state 39
 
-    (50) valor -> DECIMAL .
+    (55) valor -> CARACTER .
 
-    POR             reduce using rule 50 (valor -> DECIMAL .)
-    DIVIDIDO        reduce using rule 50 (valor -> DECIMAL .)
-    MODULO          reduce using rule 50 (valor -> DECIMAL .)
-    EQUIVALENTE     reduce using rule 50 (valor -> DECIMAL .)
-    DISTINTO        reduce using rule 50 (valor -> DECIMAL .)
-    MAS             reduce using rule 50 (valor -> DECIMAL .)
-    MENOS           reduce using rule 50 (valor -> DECIMAL .)
-    MAYOR           reduce using rule 50 (valor -> DECIMAL .)
-    MENOR           reduce using rule 50 (valor -> DECIMAL .)
-    MAYORIGUAL      reduce using rule 50 (valor -> DECIMAL .)
-    MENORIGUAL      reduce using rule 50 (valor -> DECIMAL .)
-    AND             reduce using rule 50 (valor -> DECIMAL .)
-    INTERROGACION   reduce using rule 50 (valor -> DECIMAL .)
-    OR              reduce using rule 50 (valor -> DECIMAL .)
-    PUNTOCOMA       reduce using rule 50 (valor -> DECIMAL .)
-    PARDER          reduce using rule 50 (valor -> DECIMAL .)
-    COMA            reduce using rule 50 (valor -> DECIMAL .)
-    DOSPUNTOS       reduce using rule 50 (valor -> DECIMAL .)
+    POR             reduce using rule 55 (valor -> CARACTER .)
+    DIVIDIDO        reduce using rule 55 (valor -> CARACTER .)
+    MODULO          reduce using rule 55 (valor -> CARACTER .)
+    EQUIVALENTE     reduce using rule 55 (valor -> CARACTER .)
+    DISTINTO        reduce using rule 55 (valor -> CARACTER .)
+    MAS             reduce using rule 55 (valor -> CARACTER .)
+    MENOS           reduce using rule 55 (valor -> CARACTER .)
+    MAYOR           reduce using rule 55 (valor -> CARACTER .)
+    MENOR           reduce using rule 55 (valor -> CARACTER .)
+    MAYORIGUAL      reduce using rule 55 (valor -> CARACTER .)
+    MENORIGUAL      reduce using rule 55 (valor -> CARACTER .)
+    AND             reduce using rule 55 (valor -> CARACTER .)
+    INTERROGACION   reduce using rule 55 (valor -> CARACTER .)
+    OR              reduce using rule 55 (valor -> CARACTER .)
+    PUNTOCOMA       reduce using rule 55 (valor -> CARACTER .)
+    PARDER          reduce using rule 55 (valor -> CARACTER .)
+    COMA            reduce using rule 55 (valor -> CARACTER .)
+    DOSPUNTOS       reduce using rule 55 (valor -> CARACTER .)
 
 
 state 40
 
-    (51) valor -> CARACTER .
+    (56) valor -> TRUE .
 
-    POR             reduce using rule 51 (valor -> CARACTER .)
-    DIVIDIDO        reduce using rule 51 (valor -> CARACTER .)
-    MODULO          reduce using rule 51 (valor -> CARACTER .)
-    EQUIVALENTE     reduce using rule 51 (valor -> CARACTER .)
-    DISTINTO        reduce using rule 51 (valor -> CARACTER .)
-    MAS             reduce using rule 51 (valor -> CARACTER .)
-    MENOS           reduce using rule 51 (valor -> CARACTER .)
-    MAYOR           reduce using rule 51 (valor -> CARACTER .)
-    MENOR           reduce using rule 51 (valor -> CARACTER .)
-    MAYORIGUAL      reduce using rule 51 (valor -> CARACTER .)
-    MENORIGUAL      reduce using rule 51 (valor -> CARACTER .)
-    AND             reduce using rule 51 (valor -> CARACTER .)
-    INTERROGACION   reduce using rule 51 (valor -> CARACTER .)
-    OR              reduce using rule 51 (valor -> CARACTER .)
-    PUNTOCOMA       reduce using rule 51 (valor -> CARACTER .)
-    PARDER          reduce using rule 51 (valor -> CARACTER .)
-    COMA            reduce using rule 51 (valor -> CARACTER .)
-    DOSPUNTOS       reduce using rule 51 (valor -> CARACTER .)
+    POR             reduce using rule 56 (valor -> TRUE .)
+    DIVIDIDO        reduce using rule 56 (valor -> TRUE .)
+    MODULO          reduce using rule 56 (valor -> TRUE .)
+    EQUIVALENTE     reduce using rule 56 (valor -> TRUE .)
+    DISTINTO        reduce using rule 56 (valor -> TRUE .)
+    MAS             reduce using rule 56 (valor -> TRUE .)
+    MENOS           reduce using rule 56 (valor -> TRUE .)
+    MAYOR           reduce using rule 56 (valor -> TRUE .)
+    MENOR           reduce using rule 56 (valor -> TRUE .)
+    MAYORIGUAL      reduce using rule 56 (valor -> TRUE .)
+    MENORIGUAL      reduce using rule 56 (valor -> TRUE .)
+    AND             reduce using rule 56 (valor -> TRUE .)
+    INTERROGACION   reduce using rule 56 (valor -> TRUE .)
+    OR              reduce using rule 56 (valor -> TRUE .)
+    PUNTOCOMA       reduce using rule 56 (valor -> TRUE .)
+    PARDER          reduce using rule 56 (valor -> TRUE .)
+    COMA            reduce using rule 56 (valor -> TRUE .)
+    DOSPUNTOS       reduce using rule 56 (valor -> TRUE .)
 
 
 state 41
 
-    (52) valor -> TRUE .
+    (57) valor -> FALSE .
 
-    POR             reduce using rule 52 (valor -> TRUE .)
-    DIVIDIDO        reduce using rule 52 (valor -> TRUE .)
-    MODULO          reduce using rule 52 (valor -> TRUE .)
-    EQUIVALENTE     reduce using rule 52 (valor -> TRUE .)
-    DISTINTO        reduce using rule 52 (valor -> TRUE .)
-    MAS             reduce using rule 52 (valor -> TRUE .)
-    MENOS           reduce using rule 52 (valor -> TRUE .)
-    MAYOR           reduce using rule 52 (valor -> TRUE .)
-    MENOR           reduce using rule 52 (valor -> TRUE .)
-    MAYORIGUAL      reduce using rule 52 (valor -> TRUE .)
-    MENORIGUAL      reduce using rule 52 (valor -> TRUE .)
-    AND             reduce using rule 52 (valor -> TRUE .)
-    INTERROGACION   reduce using rule 52 (valor -> TRUE .)
-    OR              reduce using rule 52 (valor -> TRUE .)
-    PUNTOCOMA       reduce using rule 52 (valor -> TRUE .)
-    PARDER          reduce using rule 52 (valor -> TRUE .)
-    COMA            reduce using rule 52 (valor -> TRUE .)
-    DOSPUNTOS       reduce using rule 52 (valor -> TRUE .)
+    POR             reduce using rule 57 (valor -> FALSE .)
+    DIVIDIDO        reduce using rule 57 (valor -> FALSE .)
+    MODULO          reduce using rule 57 (valor -> FALSE .)
+    EQUIVALENTE     reduce using rule 57 (valor -> FALSE .)
+    DISTINTO        reduce using rule 57 (valor -> FALSE .)
+    MAS             reduce using rule 57 (valor -> FALSE .)
+    MENOS           reduce using rule 57 (valor -> FALSE .)
+    MAYOR           reduce using rule 57 (valor -> FALSE .)
+    MENOR           reduce using rule 57 (valor -> FALSE .)
+    MAYORIGUAL      reduce using rule 57 (valor -> FALSE .)
+    MENORIGUAL      reduce using rule 57 (valor -> FALSE .)
+    AND             reduce using rule 57 (valor -> FALSE .)
+    INTERROGACION   reduce using rule 57 (valor -> FALSE .)
+    OR              reduce using rule 57 (valor -> FALSE .)
+    PUNTOCOMA       reduce using rule 57 (valor -> FALSE .)
+    PARDER          reduce using rule 57 (valor -> FALSE .)
+    COMA            reduce using rule 57 (valor -> FALSE .)
+    DOSPUNTOS       reduce using rule 57 (valor -> FALSE .)
 
 
 state 42
 
-    (53) valor -> FALSE .
+    (58) valor -> NULL .
 
-    POR             reduce using rule 53 (valor -> FALSE .)
-    DIVIDIDO        reduce using rule 53 (valor -> FALSE .)
-    MODULO          reduce using rule 53 (valor -> FALSE .)
-    EQUIVALENTE     reduce using rule 53 (valor -> FALSE .)
-    DISTINTO        reduce using rule 53 (valor -> FALSE .)
-    MAS             reduce using rule 53 (valor -> FALSE .)
-    MENOS           reduce using rule 53 (valor -> FALSE .)
-    MAYOR           reduce using rule 53 (valor -> FALSE .)
-    MENOR           reduce using rule 53 (valor -> FALSE .)
-    MAYORIGUAL      reduce using rule 53 (valor -> FALSE .)
-    MENORIGUAL      reduce using rule 53 (valor -> FALSE .)
-    AND             reduce using rule 53 (valor -> FALSE .)
-    INTERROGACION   reduce using rule 53 (valor -> FALSE .)
-    OR              reduce using rule 53 (valor -> FALSE .)
-    PUNTOCOMA       reduce using rule 53 (valor -> FALSE .)
-    PARDER          reduce using rule 53 (valor -> FALSE .)
-    COMA            reduce using rule 53 (valor -> FALSE .)
-    DOSPUNTOS       reduce using rule 53 (valor -> FALSE .)
+    POR             reduce using rule 58 (valor -> NULL .)
+    DIVIDIDO        reduce using rule 58 (valor -> NULL .)
+    MODULO          reduce using rule 58 (valor -> NULL .)
+    EQUIVALENTE     reduce using rule 58 (valor -> NULL .)
+    DISTINTO        reduce using rule 58 (valor -> NULL .)
+    MAS             reduce using rule 58 (valor -> NULL .)
+    MENOS           reduce using rule 58 (valor -> NULL .)
+    MAYOR           reduce using rule 58 (valor -> NULL .)
+    MENOR           reduce using rule 58 (valor -> NULL .)
+    MAYORIGUAL      reduce using rule 58 (valor -> NULL .)
+    MENORIGUAL      reduce using rule 58 (valor -> NULL .)
+    AND             reduce using rule 58 (valor -> NULL .)
+    INTERROGACION   reduce using rule 58 (valor -> NULL .)
+    OR              reduce using rule 58 (valor -> NULL .)
+    PUNTOCOMA       reduce using rule 58 (valor -> NULL .)
+    PARDER          reduce using rule 58 (valor -> NULL .)
+    COMA            reduce using rule 58 (valor -> NULL .)
+    DOSPUNTOS       reduce using rule 58 (valor -> NULL .)
 
 
 state 43
 
-    (16) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp . PARDER PUNTOCOMA
-    (17) lista_exp -> lista_exp . COMA op_Ternario
+    (20) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ . lista_exp PARDER PUNTOCOMA
+    (21) lista_exp -> . lista_exp COMA op_Ternario
+    (22) lista_exp -> . op_Ternario
+    (23) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARDER          shift and go to state 67
-    COMA            shift and go to state 68
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    lista_exp                      shift and go to state 70
+    op_Ternario                    shift and go to state 71
+    exp_Or                         shift and go to state 22
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 44
 
-    (18) lista_exp -> op_Ternario .
+    (8) declaracion -> tipoVar ID DOSPUNTOS tipo . declaracion_explicita
+    (10) declaracion_explicita -> . PUNTOCOMA
+    (11) declaracion_explicita -> . IGUAL op_Ternario PUNTOCOMA
 
-    PARDER          reduce using rule 18 (lista_exp -> op_Ternario .)
-    COMA            reduce using rule 18 (lista_exp -> op_Ternario .)
+    PUNTOCOMA       shift and go to state 73
+    IGUAL           shift and go to state 74
 
+    declaracion_explicita          shift and go to state 72
 
 state 45
 
-    (6) declaracion -> VAR ID DOSPUNTOS tipo declaracion_explicita .
+    (15) tipo -> NUMBER .
 
-    CONSOLE         reduce using rule 6 (declaracion -> VAR ID DOSPUNTOS tipo declaracion_explicita .)
-    VAR             reduce using rule 6 (declaracion -> VAR ID DOSPUNTOS tipo declaracion_explicita .)
-    $end            reduce using rule 6 (declaracion -> VAR ID DOSPUNTOS tipo declaracion_explicita .)
+    PUNTOCOMA       reduce using rule 15 (tipo -> NUMBER .)
+    IGUAL           reduce using rule 15 (tipo -> NUMBER .)
 
 
 state 46
 
-    (8) declaracion_explicita -> PUNTOCOMA .
+    (16) tipo -> FLOAT .
 
-    CONSOLE         reduce using rule 8 (declaracion_explicita -> PUNTOCOMA .)
-    VAR             reduce using rule 8 (declaracion_explicita -> PUNTOCOMA .)
-    $end            reduce using rule 8 (declaracion_explicita -> PUNTOCOMA .)
+    PUNTOCOMA       reduce using rule 16 (tipo -> FLOAT .)
+    IGUAL           reduce using rule 16 (tipo -> FLOAT .)
 
 
 state 47
 
-    (9) declaracion_explicita -> IGUAL . op_Ternario PUNTOCOMA
-    (19) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
-    (20) op_Ternario -> . exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (17) tipo -> STRING .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PUNTOCOMA       reduce using rule 17 (tipo -> STRING .)
+    IGUAL           reduce using rule 17 (tipo -> STRING .)
 
-    op_Ternario                    shift and go to state 69
-    exp_Or                         shift and go to state 23
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 48
 
-    (10) declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .
+    (18) tipo -> BOOLEAN .
 
-    CONSOLE         reduce using rule 10 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
-    VAR             reduce using rule 10 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
-    $end            reduce using rule 10 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
+    PUNTOCOMA       reduce using rule 18 (tipo -> BOOLEAN .)
+    IGUAL           reduce using rule 18 (tipo -> BOOLEAN .)
 
 
 state 49
 
-    (19) op_Ternario -> exp_Or INTERROGACION . exp_Or DOSPUNTOS exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (19) tipo -> CHAR .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PUNTOCOMA       reduce using rule 19 (tipo -> CHAR .)
+    IGUAL           reduce using rule 19 (tipo -> CHAR .)
 
-    exp_Or                         shift and go to state 70
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 50
 
-    (21) exp_Or -> exp_Or OR . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (12) declaracion_implicita -> IGUAL op_Ternario . PUNTOCOMA
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PUNTOCOMA       shift and go to state 75
 
-    exp_And                        shift and go to state 71
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 51
 
-    (23) exp_And -> exp_And AND . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (7) asignacion -> ID IGUAL op_Ternario PUNTOCOMA .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    CONSOLE         reduce using rule 7 (asignacion -> ID IGUAL op_Ternario PUNTOCOMA .)
+    ID              reduce using rule 7 (asignacion -> ID IGUAL op_Ternario PUNTOCOMA .)
+    VAR             reduce using rule 7 (asignacion -> ID IGUAL op_Ternario PUNTOCOMA .)
+    CONST           reduce using rule 7 (asignacion -> ID IGUAL op_Ternario PUNTOCOMA .)
+    $end            reduce using rule 7 (asignacion -> ID IGUAL op_Ternario PUNTOCOMA .)
 
-    exp_Not                        shift and go to state 72
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 52
 
-    (25) exp_Not -> lNot exp_Comp .
+    (23) op_Ternario -> exp_Or INTERROGACION . exp_Or DOSPUNTOS exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    AND             reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    INTERROGACION   reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    OR              reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    PUNTOCOMA       reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    PARDER          reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    COMA            reduce using rule 25 (exp_Not -> lNot exp_Comp .)
-    DOSPUNTOS       reduce using rule 25 (exp_Not -> lNot exp_Comp .)
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Or                         shift and go to state 76
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 53
 
-    (27) lNot -> lNot NOT .
+    (25) exp_Or -> exp_Or OR . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    NOT             reduce using rule 27 (lNot -> lNot NOT .)
-    PARIZQ          reduce using rule 27 (lNot -> lNot NOT .)
-    MENOS           reduce using rule 27 (lNot -> lNot NOT .)
-    ENTERO          reduce using rule 27 (lNot -> lNot NOT .)
-    CADENA          reduce using rule 27 (lNot -> lNot NOT .)
-    DECIMAL         reduce using rule 27 (lNot -> lNot NOT .)
-    CARACTER        reduce using rule 27 (lNot -> lNot NOT .)
-    TRUE            reduce using rule 27 (lNot -> lNot NOT .)
-    FALSE           reduce using rule 27 (lNot -> lNot NOT .)
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_And                        shift and go to state 77
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 54
 
-    (29) exp_Comp -> exp_Sum_Menos EQUIVALENTE . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (27) exp_And -> exp_And AND . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Sum_Menos                  shift and go to state 73
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Not                        shift and go to state 78
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 55
 
-    (30) exp_Comp -> exp_Sum_Menos DISTINTO . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (29) exp_Not -> lNot exp_Comp .
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    AND             reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    INTERROGACION   reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    OR              reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    PUNTOCOMA       reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    PARDER          reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    COMA            reduce using rule 29 (exp_Not -> lNot exp_Comp .)
+    DOSPUNTOS       reduce using rule 29 (exp_Not -> lNot exp_Comp .)
 
-    exp_Sum_Menos                  shift and go to state 74
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 56
 
-    (37) exp_Sum_Menos -> exp_Sum_Menos MAS . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (31) lNot -> lNot NOT .
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    NOT             reduce using rule 31 (lNot -> lNot NOT .)
+    PARIZQ          reduce using rule 31 (lNot -> lNot NOT .)
+    MENOS           reduce using rule 31 (lNot -> lNot NOT .)
+    ENTERO          reduce using rule 31 (lNot -> lNot NOT .)
+    CADENA          reduce using rule 31 (lNot -> lNot NOT .)
+    DECIMAL         reduce using rule 31 (lNot -> lNot NOT .)
+    CARACTER        reduce using rule 31 (lNot -> lNot NOT .)
+    TRUE            reduce using rule 31 (lNot -> lNot NOT .)
+    FALSE           reduce using rule 31 (lNot -> lNot NOT .)
+    NULL            reduce using rule 31 (lNot -> lNot NOT .)
+    ID              reduce using rule 31 (lNot -> lNot NOT .)
 
-    exp_Mul_Div                    shift and go to state 75
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 57
 
-    (38) exp_Sum_Menos -> exp_Sum_Menos MENOS . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (33) exp_Comp -> exp_Sum_Menos EQUIVALENTE . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Mul_Div                    shift and go to state 76
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 79
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 58
 
-    (32) exp_rel -> exp_Sum_Menos MAYOR . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (34) exp_Comp -> exp_Sum_Menos DISTINTO . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Sum_Menos                  shift and go to state 77
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 80
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 59
 
-    (33) exp_rel -> exp_Sum_Menos MENOR . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (41) exp_Sum_Menos -> exp_Sum_Menos MAS . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Sum_Menos                  shift and go to state 78
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Mul_Div                    shift and go to state 81
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 60
 
-    (34) exp_rel -> exp_Sum_Menos MAYORIGUAL . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (42) exp_Sum_Menos -> exp_Sum_Menos MENOS . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Sum_Menos                  shift and go to state 79
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Mul_Div                    shift and go to state 82
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 61
 
-    (35) exp_rel -> exp_Sum_Menos MENORIGUAL . exp_Sum_Menos
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (36) exp_rel -> exp_Sum_Menos MAYOR . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Sum_Menos                  shift and go to state 80
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 83
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 62
 
-    (40) exp_Mul_Div -> exp_Mul_Div POR . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (37) exp_rel -> exp_Sum_Menos MENOR . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Parentesis                 shift and go to state 81
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 84
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 63
 
-    (41) exp_Mul_Div -> exp_Mul_Div DIVIDIDO . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (38) exp_rel -> exp_Sum_Menos MAYORIGUAL . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Parentesis                 shift and go to state 82
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 85
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 64
 
-    (42) exp_Mul_Div -> exp_Mul_Div MODULO . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (39) exp_rel -> exp_Sum_Menos MENORIGUAL . exp_Sum_Menos
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
-    exp_Parentesis                 shift and go to state 83
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
+    exp_Sum_Menos                  shift and go to state 86
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 65
 
-    (46) exp_Negativo -> MENOS valor .
+    (44) exp_Mul_Div -> exp_Mul_Div POR . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    POR             reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    DIVIDIDO        reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MODULO          reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    EQUIVALENTE     reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    DISTINTO        reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MAS             reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MENOS           reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MAYOR           reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MENOR           reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MAYORIGUAL      reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    MENORIGUAL      reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    AND             reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    INTERROGACION   reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    OR              reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    PUNTOCOMA       reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    PARDER          reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    COMA            reduce using rule 46 (exp_Negativo -> MENOS valor .)
-    DOSPUNTOS       reduce using rule 46 (exp_Negativo -> MENOS valor .)
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Parentesis                 shift and go to state 87
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 66
 
-    (44) exp_Parentesis -> PARIZQ exp_Or . PARDER
-    (21) exp_Or -> exp_Or . OR exp_And
+    (45) exp_Mul_Div -> exp_Mul_Div DIVIDIDO . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PARDER          shift and go to state 84
-    OR              shift and go to state 50
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Parentesis                 shift and go to state 88
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 67
 
-    (16) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER . PUNTOCOMA
+    (46) exp_Mul_Div -> exp_Mul_Div MODULO . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    PUNTOCOMA       shift and go to state 85
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    exp_Parentesis                 shift and go to state 89
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 68
 
-    (17) lista_exp -> lista_exp COMA . op_Ternario
-    (19) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
-    (20) op_Ternario -> . exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (50) exp_Negativo -> MENOS valor .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    POR             reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    DIVIDIDO        reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MODULO          reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    EQUIVALENTE     reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    DISTINTO        reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MAS             reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MENOS           reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MAYOR           reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MENOR           reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MAYORIGUAL      reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    MENORIGUAL      reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    AND             reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    INTERROGACION   reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    OR              reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    PUNTOCOMA       reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    PARDER          reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    COMA            reduce using rule 50 (exp_Negativo -> MENOS valor .)
+    DOSPUNTOS       reduce using rule 50 (exp_Negativo -> MENOS valor .)
 
-    op_Ternario                    shift and go to state 86
-    exp_Or                         shift and go to state 23
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 69
 
-    (9) declaracion_explicita -> IGUAL op_Ternario . PUNTOCOMA
+    (48) exp_Parentesis -> PARIZQ exp_Or . PARDER
+    (25) exp_Or -> exp_Or . OR exp_And
 
-    PUNTOCOMA       shift and go to state 87
+    PARDER          shift and go to state 90
+    OR              shift and go to state 53
 
 
 state 70
 
-    (19) op_Ternario -> exp_Or INTERROGACION exp_Or . DOSPUNTOS exp_Or
-    (21) exp_Or -> exp_Or . OR exp_And
+    (20) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp . PARDER PUNTOCOMA
+    (21) lista_exp -> lista_exp . COMA op_Ternario
 
-    DOSPUNTOS       shift and go to state 88
-    OR              shift and go to state 50
+    PARDER          shift and go to state 91
+    COMA            shift and go to state 92
 
 
 state 71
 
-    (21) exp_Or -> exp_Or OR exp_And .
-    (23) exp_And -> exp_And . AND exp_Not
+    (22) lista_exp -> op_Ternario .
 
-    INTERROGACION   reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    OR              reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    PUNTOCOMA       reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    PARDER          reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    COMA            reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    DOSPUNTOS       reduce using rule 21 (exp_Or -> exp_Or OR exp_And .)
-    AND             shift and go to state 51
+    PARDER          reduce using rule 22 (lista_exp -> op_Ternario .)
+    COMA            reduce using rule 22 (lista_exp -> op_Ternario .)
 
 
 state 72
 
-    (23) exp_And -> exp_And AND exp_Not .
+    (8) declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .
 
-    AND             reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    INTERROGACION   reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    OR              reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    PUNTOCOMA       reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    PARDER          reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    COMA            reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
-    DOSPUNTOS       reduce using rule 23 (exp_And -> exp_And AND exp_Not .)
+    CONSOLE         reduce using rule 8 (declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .)
+    ID              reduce using rule 8 (declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .)
+    VAR             reduce using rule 8 (declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .)
+    CONST           reduce using rule 8 (declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .)
+    $end            reduce using rule 8 (declaracion -> tipoVar ID DOSPUNTOS tipo declaracion_explicita .)
 
 
 state 73
 
-    (29) exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (10) declaracion_explicita -> PUNTOCOMA .
 
-    AND             reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    OR              reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    PARDER          reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    COMA            reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 29 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    CONSOLE         reduce using rule 10 (declaracion_explicita -> PUNTOCOMA .)
+    ID              reduce using rule 10 (declaracion_explicita -> PUNTOCOMA .)
+    VAR             reduce using rule 10 (declaracion_explicita -> PUNTOCOMA .)
+    CONST           reduce using rule 10 (declaracion_explicita -> PUNTOCOMA .)
+    $end            reduce using rule 10 (declaracion_explicita -> PUNTOCOMA .)
 
 
 state 74
 
-    (30) exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (11) declaracion_explicita -> IGUAL . op_Ternario PUNTOCOMA
+    (23) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
 
-    AND             reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    OR              reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    PARDER          reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    COMA            reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 30 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
 
+    op_Ternario                    shift and go to state 93
+    exp_Or                         shift and go to state 22
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
 
 state 75
 
-    (37) exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .
-    (40) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
-    (41) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
+    (12) declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .
 
-    EQUIVALENTE     reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    DISTINTO        reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MAS             reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MENOS           reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MAYOR           reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MENOR           reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MAYORIGUAL      reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    MENORIGUAL      reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    AND             reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    INTERROGACION   reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    OR              reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    PUNTOCOMA       reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    PARDER          reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    COMA            reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    DOSPUNTOS       reduce using rule 37 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
-    POR             shift and go to state 62
-    DIVIDIDO        shift and go to state 63
-    MODULO          shift and go to state 64
+    CONSOLE         reduce using rule 12 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
+    ID              reduce using rule 12 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
+    VAR             reduce using rule 12 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
+    CONST           reduce using rule 12 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
+    $end            reduce using rule 12 (declaracion_implicita -> IGUAL op_Ternario PUNTOCOMA .)
 
 
 state 76
 
-    (38) exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .
-    (40) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
-    (41) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
+    (23) op_Ternario -> exp_Or INTERROGACION exp_Or . DOSPUNTOS exp_Or
+    (25) exp_Or -> exp_Or . OR exp_And
 
-    EQUIVALENTE     reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    DISTINTO        reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MAS             reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MENOS           reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MAYOR           reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MENOR           reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MAYORIGUAL      reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    MENORIGUAL      reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    AND             reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    INTERROGACION   reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    OR              reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    PUNTOCOMA       reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    PARDER          reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    COMA            reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    DOSPUNTOS       reduce using rule 38 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
-    POR             shift and go to state 62
-    DIVIDIDO        shift and go to state 63
-    MODULO          shift and go to state 64
+    DOSPUNTOS       shift and go to state 94
+    OR              shift and go to state 53
 
 
 state 77
 
-    (32) exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (25) exp_Or -> exp_Or OR exp_And .
+    (27) exp_And -> exp_And . AND exp_Not
 
-    AND             reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    OR              reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    PARDER          reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    COMA            reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 32 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    INTERROGACION   reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    OR              reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    PUNTOCOMA       reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    PARDER          reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    COMA            reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    DOSPUNTOS       reduce using rule 25 (exp_Or -> exp_Or OR exp_And .)
+    AND             shift and go to state 54
 
 
 state 78
 
-    (33) exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (27) exp_And -> exp_And AND exp_Not .
 
-    AND             reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    OR              reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    PARDER          reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    COMA            reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 33 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    AND             reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    INTERROGACION   reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    OR              reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    PUNTOCOMA       reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    PARDER          reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    COMA            reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
+    DOSPUNTOS       reduce using rule 27 (exp_And -> exp_And AND exp_Not .)
 
 
 state 79
 
-    (34) exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (33) exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    AND             reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    OR              reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    PARDER          reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    COMA            reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 34 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    AND             reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    OR              reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    PARDER          reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    COMA            reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 33 (exp_Comp -> exp_Sum_Menos EQUIVALENTE exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 80
 
-    (35) exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .
-    (37) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
+    (34) exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    AND             reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    INTERROGACION   reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    OR              reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    PUNTOCOMA       reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    PARDER          reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    COMA            reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    DOSPUNTOS       reduce using rule 35 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
-    MAS             shift and go to state 56
-    MENOS           shift and go to state 57
+    AND             reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    OR              reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    PARDER          reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    COMA            reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 34 (exp_Comp -> exp_Sum_Menos DISTINTO exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 81
 
-    (40) exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .
+    (41) exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .
+    (44) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
+    (45) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
 
-    POR             reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    DIVIDIDO        reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MODULO          reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    EQUIVALENTE     reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    DISTINTO        reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MAS             reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MENOS           reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MAYOR           reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MENOR           reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MAYORIGUAL      reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    MENORIGUAL      reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    AND             reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    INTERROGACION   reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    OR              reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    PUNTOCOMA       reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    PARDER          reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    COMA            reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
-    DOSPUNTOS       reduce using rule 40 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    DISTINTO        reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MAS             reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MENOS           reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MAYOR           reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MENOR           reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MAYORIGUAL      reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    MENORIGUAL      reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    AND             reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    INTERROGACION   reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    OR              reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    PUNTOCOMA       reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    PARDER          reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    COMA            reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    DOSPUNTOS       reduce using rule 41 (exp_Sum_Menos -> exp_Sum_Menos MAS exp_Mul_Div .)
+    POR             shift and go to state 65
+    DIVIDIDO        shift and go to state 66
+    MODULO          shift and go to state 67
 
 
 state 82
 
-    (41) exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .
+    (42) exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .
+    (44) exp_Mul_Div -> exp_Mul_Div . POR exp_Parentesis
+    (45) exp_Mul_Div -> exp_Mul_Div . DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> exp_Mul_Div . MODULO exp_Parentesis
 
-    POR             reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    DIVIDIDO        reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MODULO          reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    EQUIVALENTE     reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    DISTINTO        reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MAS             reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MENOS           reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MAYOR           reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MENOR           reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MAYORIGUAL      reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    MENORIGUAL      reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    AND             reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    INTERROGACION   reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    OR              reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    PUNTOCOMA       reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    PARDER          reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    COMA            reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
-    DOSPUNTOS       reduce using rule 41 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    DISTINTO        reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MAS             reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MENOS           reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MAYOR           reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MENOR           reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MAYORIGUAL      reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    MENORIGUAL      reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    AND             reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    INTERROGACION   reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    OR              reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    PUNTOCOMA       reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    PARDER          reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    COMA            reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    DOSPUNTOS       reduce using rule 42 (exp_Sum_Menos -> exp_Sum_Menos MENOS exp_Mul_Div .)
+    POR             shift and go to state 65
+    DIVIDIDO        shift and go to state 66
+    MODULO          shift and go to state 67
 
 
 state 83
 
-    (42) exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .
+    (36) exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    POR             reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    DIVIDIDO        reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MODULO          reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    EQUIVALENTE     reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    DISTINTO        reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MAS             reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MENOS           reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MAYOR           reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MENOR           reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MAYORIGUAL      reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    MENORIGUAL      reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    AND             reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    INTERROGACION   reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    OR              reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    PUNTOCOMA       reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    PARDER          reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    COMA            reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
-    DOSPUNTOS       reduce using rule 42 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    AND             reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    OR              reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    PARDER          reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    COMA            reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 36 (exp_rel -> exp_Sum_Menos MAYOR exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 84
 
-    (44) exp_Parentesis -> PARIZQ exp_Or PARDER .
+    (37) exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    POR             reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    DIVIDIDO        reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MODULO          reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    EQUIVALENTE     reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    DISTINTO        reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MAS             reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MENOS           reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MAYOR           reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MENOR           reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MAYORIGUAL      reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    MENORIGUAL      reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    AND             reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    INTERROGACION   reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    OR              reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    PUNTOCOMA       reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    PARDER          reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    COMA            reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
-    DOSPUNTOS       reduce using rule 44 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    AND             reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    OR              reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    PARDER          reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    COMA            reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 37 (exp_rel -> exp_Sum_Menos MENOR exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 85
 
-    (16) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .
+    (38) exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    CONSOLE         reduce using rule 16 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
-    VAR             reduce using rule 16 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
-    $end            reduce using rule 16 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+    AND             reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    OR              reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    PARDER          reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    COMA            reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 38 (exp_rel -> exp_Sum_Menos MAYORIGUAL exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 86
 
-    (17) lista_exp -> lista_exp COMA op_Ternario .
+    (39) exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .
+    (41) exp_Sum_Menos -> exp_Sum_Menos . MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> exp_Sum_Menos . MENOS exp_Mul_Div
 
-    PARDER          reduce using rule 17 (lista_exp -> lista_exp COMA op_Ternario .)
-    COMA            reduce using rule 17 (lista_exp -> lista_exp COMA op_Ternario .)
+    AND             reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    INTERROGACION   reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    OR              reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    PUNTOCOMA       reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    PARDER          reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    COMA            reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    DOSPUNTOS       reduce using rule 39 (exp_rel -> exp_Sum_Menos MENORIGUAL exp_Sum_Menos .)
+    MAS             shift and go to state 59
+    MENOS           shift and go to state 60
 
 
 state 87
 
-    (9) declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .
+    (44) exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .
 
-    CONSOLE         reduce using rule 9 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
-    VAR             reduce using rule 9 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
-    $end            reduce using rule 9 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+    POR             reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    DIVIDIDO        reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MODULO          reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    DISTINTO        reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MAS             reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MENOS           reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MAYOR           reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MENOR           reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MAYORIGUAL      reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    MENORIGUAL      reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    AND             reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    INTERROGACION   reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    OR              reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    PUNTOCOMA       reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    PARDER          reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    COMA            reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
+    DOSPUNTOS       reduce using rule 44 (exp_Mul_Div -> exp_Mul_Div POR exp_Parentesis .)
 
 
 state 88
 
-    (19) op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS . exp_Or
-    (21) exp_Or -> . exp_Or OR exp_And
-    (22) exp_Or -> . exp_And
-    (23) exp_And -> . exp_And AND exp_Not
-    (24) exp_And -> . exp_Not
-    (25) exp_Not -> . lNot exp_Comp
-    (26) exp_Not -> . exp_Comp
-    (27) lNot -> . lNot NOT
-    (28) lNot -> . NOT
-    (29) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
-    (30) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
-    (31) exp_Comp -> . exp_rel
-    (37) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
-    (38) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
-    (39) exp_Sum_Menos -> . exp_Mul_Div
-    (32) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
-    (33) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
-    (34) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
-    (35) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
-    (36) exp_rel -> . exp_Sum_Menos
-    (40) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
-    (41) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
-    (42) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
-    (43) exp_Mul_Div -> . exp_Parentesis
-    (44) exp_Parentesis -> . PARIZQ exp_Or PARDER
-    (45) exp_Parentesis -> . exp_Negativo
-    (46) exp_Negativo -> . MENOS valor
-    (47) exp_Negativo -> . valor
-    (48) valor -> . ENTERO
-    (49) valor -> . CADENA
-    (50) valor -> . DECIMAL
-    (51) valor -> . CARACTER
-    (52) valor -> . TRUE
-    (53) valor -> . FALSE
+    (45) exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .
 
-    NOT             shift and go to state 28
-    PARIZQ          shift and go to state 34
-    MENOS           shift and go to state 32
-    ENTERO          shift and go to state 37
-    CADENA          shift and go to state 38
-    DECIMAL         shift and go to state 39
-    CARACTER        shift and go to state 40
-    TRUE            shift and go to state 41
-    FALSE           shift and go to state 42
+    POR             reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    DIVIDIDO        reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MODULO          reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    DISTINTO        reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MAS             reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MENOS           reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MAYOR           reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MENOR           reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MAYORIGUAL      reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    MENORIGUAL      reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    AND             reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    INTERROGACION   reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    OR              reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    PUNTOCOMA       reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    PARDER          reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    COMA            reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
+    DOSPUNTOS       reduce using rule 45 (exp_Mul_Div -> exp_Mul_Div DIVIDIDO exp_Parentesis .)
 
-    exp_Or                         shift and go to state 89
-    exp_And                        shift and go to state 24
-    exp_Not                        shift and go to state 25
-    lNot                           shift and go to state 26
-    exp_Comp                       shift and go to state 27
-    exp_Sum_Menos                  shift and go to state 29
-    exp_rel                        shift and go to state 30
-    exp_Mul_Div                    shift and go to state 31
-    exp_Parentesis                 shift and go to state 33
-    exp_Negativo                   shift and go to state 35
-    valor                          shift and go to state 36
 
 state 89
 
-    (19) op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .
-    (21) exp_Or -> exp_Or . OR exp_And
+    (46) exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .
 
-    PUNTOCOMA       reduce using rule 19 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
-    PARDER          reduce using rule 19 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
-    COMA            reduce using rule 19 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
-    OR              shift and go to state 50
+    POR             reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    DIVIDIDO        reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MODULO          reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    EQUIVALENTE     reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    DISTINTO        reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MAS             reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MENOS           reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MAYOR           reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MENOR           reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MAYORIGUAL      reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    MENORIGUAL      reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    AND             reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    INTERROGACION   reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    OR              reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    PUNTOCOMA       reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    PARDER          reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    COMA            reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+    DOSPUNTOS       reduce using rule 46 (exp_Mul_Div -> exp_Mul_Div MODULO exp_Parentesis .)
+
+
+state 90
+
+    (48) exp_Parentesis -> PARIZQ exp_Or PARDER .
+
+    POR             reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    DIVIDIDO        reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MODULO          reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    EQUIVALENTE     reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    DISTINTO        reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MAS             reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MENOS           reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MAYOR           reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MENOR           reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MAYORIGUAL      reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    MENORIGUAL      reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    AND             reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    INTERROGACION   reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    OR              reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    PUNTOCOMA       reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    PARDER          reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    COMA            reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+    DOSPUNTOS       reduce using rule 48 (exp_Parentesis -> PARIZQ exp_Or PARDER .)
+
+
+state 91
+
+    (20) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 95
+
+
+state 92
+
+    (21) lista_exp -> lista_exp COMA . op_Ternario
+    (23) op_Ternario -> . exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or
+    (24) op_Ternario -> . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
+
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
+
+    op_Ternario                    shift and go to state 96
+    exp_Or                         shift and go to state 22
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
+
+state 93
+
+    (11) declaracion_explicita -> IGUAL op_Ternario . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 97
+
+
+state 94
+
+    (23) op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS . exp_Or
+    (25) exp_Or -> . exp_Or OR exp_And
+    (26) exp_Or -> . exp_And
+    (27) exp_And -> . exp_And AND exp_Not
+    (28) exp_And -> . exp_Not
+    (29) exp_Not -> . lNot exp_Comp
+    (30) exp_Not -> . exp_Comp
+    (31) lNot -> . lNot NOT
+    (32) lNot -> . NOT
+    (33) exp_Comp -> . exp_Sum_Menos EQUIVALENTE exp_Sum_Menos
+    (34) exp_Comp -> . exp_Sum_Menos DISTINTO exp_Sum_Menos
+    (35) exp_Comp -> . exp_rel
+    (41) exp_Sum_Menos -> . exp_Sum_Menos MAS exp_Mul_Div
+    (42) exp_Sum_Menos -> . exp_Sum_Menos MENOS exp_Mul_Div
+    (43) exp_Sum_Menos -> . exp_Mul_Div
+    (36) exp_rel -> . exp_Sum_Menos MAYOR exp_Sum_Menos
+    (37) exp_rel -> . exp_Sum_Menos MENOR exp_Sum_Menos
+    (38) exp_rel -> . exp_Sum_Menos MAYORIGUAL exp_Sum_Menos
+    (39) exp_rel -> . exp_Sum_Menos MENORIGUAL exp_Sum_Menos
+    (40) exp_rel -> . exp_Sum_Menos
+    (44) exp_Mul_Div -> . exp_Mul_Div POR exp_Parentesis
+    (45) exp_Mul_Div -> . exp_Mul_Div DIVIDIDO exp_Parentesis
+    (46) exp_Mul_Div -> . exp_Mul_Div MODULO exp_Parentesis
+    (47) exp_Mul_Div -> . exp_Parentesis
+    (48) exp_Parentesis -> . PARIZQ exp_Or PARDER
+    (49) exp_Parentesis -> . exp_Negativo
+    (50) exp_Negativo -> . MENOS valor
+    (51) exp_Negativo -> . valor
+    (52) valor -> . ENTERO
+    (53) valor -> . CADENA
+    (54) valor -> . DECIMAL
+    (55) valor -> . CARACTER
+    (56) valor -> . TRUE
+    (57) valor -> . FALSE
+    (58) valor -> . NULL
+    (59) valor -> . ID
+
+    NOT             shift and go to state 27
+    PARIZQ          shift and go to state 33
+    MENOS           shift and go to state 31
+    ENTERO          shift and go to state 36
+    CADENA          shift and go to state 37
+    DECIMAL         shift and go to state 38
+    CARACTER        shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    NULL            shift and go to state 42
+    ID              shift and go to state 20
+
+    exp_Or                         shift and go to state 98
+    exp_And                        shift and go to state 23
+    exp_Not                        shift and go to state 24
+    lNot                           shift and go to state 25
+    exp_Comp                       shift and go to state 26
+    exp_Sum_Menos                  shift and go to state 28
+    exp_rel                        shift and go to state 29
+    exp_Mul_Div                    shift and go to state 30
+    exp_Parentesis                 shift and go to state 32
+    exp_Negativo                   shift and go to state 34
+    valor                          shift and go to state 35
+
+state 95
+
+    (20) imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .
+
+    CONSOLE         reduce using rule 20 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+    ID              reduce using rule 20 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+    VAR             reduce using rule 20 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+    CONST           reduce using rule 20 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+    $end            reduce using rule 20 (imprimir_instr -> CONSOLE PUNTO LOG PARIZQ lista_exp PARDER PUNTOCOMA .)
+
+
+state 96
+
+    (21) lista_exp -> lista_exp COMA op_Ternario .
+
+    PARDER          reduce using rule 21 (lista_exp -> lista_exp COMA op_Ternario .)
+    COMA            reduce using rule 21 (lista_exp -> lista_exp COMA op_Ternario .)
+
+
+state 97
+
+    (11) declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .
+
+    CONSOLE         reduce using rule 11 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+    ID              reduce using rule 11 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+    VAR             reduce using rule 11 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+    CONST           reduce using rule 11 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+    $end            reduce using rule 11 (declaracion_explicita -> IGUAL op_Ternario PUNTOCOMA .)
+
+
+state 98
+
+    (23) op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .
+    (25) exp_Or -> exp_Or . OR exp_And
+
+    PUNTOCOMA       reduce using rule 23 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
+    PARDER          reduce using rule 23 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
+    COMA            reduce using rule 23 (op_Ternario -> exp_Or INTERROGACION exp_Or DOSPUNTOS exp_Or .)
+    OR              shift and go to state 53
 

@@ -2,18 +2,24 @@
 from expresiones import *
 from instrucciones import *
 from simbolos import *
-
+from tipos import TIPOS_P,TIPOS_Simbolos
+from errores import error
 
 def ejec_instrucciones(instrucciones,TS):
     for inst in instrucciones:
         if isinstance(inst,Imprimir): ejec_Imprimir(inst,TS)
         elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
         elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
+        elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
         #else: print('Error: instruccion no valida')
 
 def ejec_Imprimir(inst,TS):
     for exp in inst.lista:
-        print('>> ', ejec_expresion(exp,TS))
+        #print('>> ', ejec_expresion(exp,TS))
+        result = ejec_expresion(exp,TS)
+        TS.salida+= "> "
+        TS.salida+= str(result)
+        TS.salida += "\n"
     
 
 def ejec_expresion(exp,TS):
@@ -22,22 +28,26 @@ def ejec_expresion(exp,TS):
     elif isinstance(exp,ExpresionRelacional):
         return resolver_expresionRelacional(exp,TS)
     elif isinstance(exp,ExpresionDobleComilla):
-        return exp.cad
+        return exp.cad[1:len(exp.cad)-1]
     elif isinstance(exp,ExpresionComillaSimple):
-        return exp.cad
+        return exp.cad[1:len(exp.cad)-1]
     elif isinstance(exp,ExpresionBoleana):
         return resolver_expresionBoleana(exp,TS)
     elif isinstance(exp,ExpresionTernaria):
         return resolver_expresionTernaria(exp,TS)
+    elif isinstance(exp,ExpresionID):
+        return resolver_expresionId(exp,TS)
+    elif isinstance(exp,ExpresionNull):
+        return None
     else :
-        print("Error: expresion no valida")
+        return None
     
  
 
 def resolver_expresionAritmetica(expNum,TS):
     if isinstance(expNum,ExpresionBinaria):
-        exp1 = resolver_expresionAritmetica(expNum.exp1,TS)
-        exp2 = resolver_expresionAritmetica(expNum.exp2,TS)
+        exp1 = ejec_expresion(expNum.exp1,TS)
+        exp2 = ejec_expresion(expNum.exp2,TS)
 
         if expNum.operador == OPERACION_ARITMETICA.MAS : return exp1 + exp2
         if expNum.operador == OPERACION_ARITMETICA.MENOS : return exp1 - exp2
@@ -50,8 +60,7 @@ def resolver_expresionAritmetica(expNum,TS):
         return expNum.exp1
     elif isinstance(expNum,ExpresionDecimal):
         return expNum.exp1
-    elif isinstance(expNum,ExpresionDobleComilla):
-        return expNum.cad
+    
 
 def resolver_expresionRelacional(exp,TS):
     if isinstance(exp,ExpresionRelacional):
@@ -83,12 +92,94 @@ def resolver_expresionTernaria(expTer,TS):
         return ejec_expresion(expTer.exp2,TS)
     return ejec_expresion(expTer.exp3,TS)
 
+def resolver_expresionId(expId,TS):
+    exp_id =  TS.obtener(expId.id)
+    if exp_id== None:
+        TS.listaErrores.append(error("Se quiere usar valor null con variable "+expId.id,0,0,"Semantico"))
+        print("Se quiere usar valor null con variable "+expId.id)
+        return
+    return exp_id.valor
+
+
 def ejec_declaracion_explicita(inst,TS):
-    exp = ejec_expresion(inst.valor)
-    simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
+    exp = ejec_expresion(inst.valor,TS)
+
+    if TS.obtener(inst.id)!=None:
+        print("Ya declarada variable "+inst.id)
+        TS.listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
+        return
+    try:
+        if inst.tipo==TIPOS_P.ENTERO:
+            exp= int(exp)
+        elif inst.tipo==TIPOS_P.FLOAT:
+            exp= float(exp)
+        elif inst.tipo==TIPOS_P.CADENA:
+            exp= float(exp)
+        elif inst.tipo==TIPOS_P.CHAR:
+            exp= float(exp)
+        elif inst.tipo==TIPOS_P.BOOLEAN:
+            exp= bool(exp)
+        
+    except:
+        print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
+        TS.listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
+
+    if inst.const == True:
+        if exp==None:
+            print("No asigno valor a const "+inst.id)
+            TS.listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
+            return
+        else:
+            simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.CONSTANTE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
+    else:
+        simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
+        
     TS.agregar(simbolo)
 
 def ejec_declaracion_implicita(inst,TS):
-    exp = ejec_expresion(inst.valor)
-    simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
+    exp = ejec_expresion(inst.valor,TS)
+    if TS.obtener(inst.id)!=None:
+        print("Ya declarada variable "+inst.id)
+        TS.listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
+        return
+
+    if inst.const == True:
+        if exp==None:
+            print("No asigno valor a const "+inst.id)
+            TS.listaErrores.append(error("No asigno valor a const "+inst.id,0,0,"Semantico"))
+            return
+        else:
+            simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.CONSTANTE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
+    else:
+        simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
     TS.agregar(simbolo)
+
+def ejec_Asignacion(inst,TS):
+    exp = ejec_expresion(inst.valor,TS)
+    simbolo = TS.obtener(inst.id)
+    
+    if simbolo== None:
+        print("No se encontro variable "+inst.id)
+        TS.listaErrores.append(error("No se encontro variable "+inst.id,0,0,"Semantico"))
+        return
+
+    if simbolo.tipo_simbolo==TIPOS_Simbolos.CONSTANTE:
+        print("No se puede asignar a Constante "+inst.id)
+        TS.listaErrores.append(error("No se puede asignar a Constante "+inst.id,0,0,"Semantico"))
+        return
+
+    try:
+        if simbolo.tipo==TIPOS_P.ENTERO:
+            exp= int(exp)
+        elif simbolo.tipo==TIPOS_P.FLOAT:
+            exp= float(exp)
+        elif simbolo.tipo==TIPOS_P.CADENA:
+            exp= float(exp)
+        elif simbolo.tipo==TIPOS_P.CHAR:
+            exp= float(exp)
+        elif simbolo.tipo==TIPOS_P.BOOLEAN:
+            exp= bool(exp)
+    except:
+        print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
+        TS.listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
+    TS.actualizar(inst.id,exp)

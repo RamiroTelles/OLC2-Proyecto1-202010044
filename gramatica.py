@@ -7,8 +7,10 @@ reservadas = {
     'log':'LOG',
     'true':'TRUE',
     'false':'FALSE',
+    'null':'NULL',
     'let':'LET',
     'var':'VAR',
+    'const':'CONST',
     'number': 'NUMBER',
     'float':'FLOAT',
     'string': 'STRING',
@@ -166,17 +168,30 @@ def p_instrucciones_instruccion(t) :
 
 def p_instruccion(t) :
     '''instruccion      : imprimir_instr
-                        | declaracion'''
+                        | declaracion
+                        | asignacion'''
     t[0] = t[1]
 
+
+def p_asignacion(t):
+    '''asignacion    : ID IGUAL op_Ternario PUNTOCOMA'''
+    t[0] = Asignacion(t[1],t[3])
+
 def p_declaracion1(t):
-    '''declaracion  : VAR ID DOSPUNTOS tipo declaracion_explicita'''
-    t[0]= DeclaracionExplicita(t[2],t[5],t[4])
+    '''declaracion  : tipoVar ID DOSPUNTOS tipo declaracion_explicita'''
+    if t[1]=='const':
+        t[0]= DeclaracionExplicita(t[2],t[5],t[4],True)
+    else:
+        t[0]= DeclaracionExplicita(t[2],t[5],t[4])
+    
 
 
 def p_declaracion2(t):
-    '''declaracion  : VAR ID declaracion_implicita'''
-    t[0] = DeclaracionImplicita(t[2],t[3])
+    '''declaracion  : tipoVar ID declaracion_implicita'''
+    if t[1]=='const':
+        t[0]= DeclaracionImplicita(t[2],t[3],True)
+    else:
+        t[0]= DeclaracionImplicita(t[2],t[3])
 
 def p_declaracion_explicita1(t):
     '''declaracion_explicita    : PUNTOCOMA'''
@@ -190,6 +205,11 @@ def p_declaracion_explicita2(t):
 def p_declaracion_implicita(t):
     '''declaracion_implicita    : IGUAL op_Ternario PUNTOCOMA'''
     t[0] = t[2]
+
+def p_tipoVar(t):
+    '''tipoVar  : VAR
+                | CONST'''
+    t[0]=t[1]
 
 
 def p_tipoNumber(t):
@@ -356,6 +376,14 @@ def p_valorBoolean(t):
     '''valor    : TRUE
                 | FALSE'''
     t[0]=Expresion_True_False(t[1])
+
+def p_valorNull(t):
+    '''valor    : NULL'''
+    t[0]=ExpresionNull()
+
+def p_valorId(t):
+    '''valor    : ID'''
+    t[0]=ExpresionID(t[1])
     
     
 

@@ -8,3 +8,9 @@ class TIPOS_P(Enum):
     CHAR=5
     VOID=6
    
+
+
+class TIPOS_Simbolos(Enum):
+    VARIABLE=1
+    FUNCION=2
+    CONSTANTE=3
