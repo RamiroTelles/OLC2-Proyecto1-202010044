@@ -19,6 +19,9 @@ reservadas = {
     'else' : 'ELSE',
     'while': 'WHILE',
     'for': 'FOR',
+    'continue': 'CONTINUE',
+    'break': 'BREAK',
+    'return': 'RETURN',
     'function': 'FUNCTION',
     'interface': 'INTERFACE'
 }
@@ -177,8 +180,27 @@ def p_instruccion(t) :
                         | asignacion PUNTOCOMA
                         | sIf
                         | sWhile
-                        | sFor'''
+                        | sFor
+                        | sContinue
+                        | sBreak
+                        | sReturn'''
     t[0] = t[1]
+
+def p_sContinue(t):
+    '''sContinue    : CONTINUE PUNTOCOMA'''
+    t[0]= inst_Continue()
+
+def p_sBreak(t):
+    '''sBreak    : BREAK PUNTOCOMA'''
+    t[0]= inst_Break()
+
+def p_sReturn1(t):
+    '''sReturn    : RETURN PUNTOCOMA'''
+    t[0]= inst_Return(ExpresionNull())
+
+def p_sReturn2(t):
+    '''sReturn    : RETURN op_Ternario PUNTOCOMA'''
+    t[0]= inst_Return(t[2])
 
 def p_sFor(t):
     '''sFor : FOR PARIZQ declaracion op_Ternario PUNTOCOMA asignacion PARDER LLAVIZQ instrucciones LLAVDER'''

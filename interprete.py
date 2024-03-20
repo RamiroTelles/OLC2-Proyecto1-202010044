@@ -11,8 +11,12 @@ def ejec_instrucciones(instrucciones,TS):
         elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
         elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
         elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
-        elif isinstance(inst,controlFlujo): ejec_controlFlujo(inst,TS)
+        elif isinstance(inst,controlFlujo): 
+            tipo_Inst=ejec_controlFlujo(inst,TS)
+            if tipo_Inst!=None:
+                return tipo_Inst
         #else: print('Error: instruccion no valida')
+        
 
 def ejec_Imprimir(inst,TS):
     for exp in inst.lista:
@@ -187,31 +191,49 @@ def ejec_Asignacion(inst,TS):
 
 
 def ejec_controlFlujo(inst,TS):
-    if isinstance(inst,inst_if): ejec_If(inst,TS)
+    if isinstance(inst,inst_if): 
+        ret_ = ejec_If(inst,TS)
+        if ret_ != None:
+            return ret_
+
     elif isinstance(inst,inst_while): ejec_While(inst,TS)
     elif isinstance(inst,inst_for): ejec_For(inst,TS)
+    elif isinstance(inst,inst_Continue): return inst
+    elif isinstance(inst,inst_Break): return inst
     
 def ejec_If(inst,TS):
     exp = ejec_expresion(inst.cond,TS)
     if exp:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
-        ejec_instrucciones(inst.instruccionesIf,TablaLocal)
+        ret_ = ejec_instrucciones(inst.instruccionesIf,TablaLocal)
         TS.salida+= TablaLocal.salida
+        
     else:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
-        ejec_instrucciones(inst.instruccionesElse,TablaLocal)
+        ret_ = ejec_instrucciones(inst.instruccionesElse,TablaLocal)
         TS.salida+= TablaLocal.salida
+    
+    return ret_
 
 def ejec_While(inst,TS):
+    
     exp = ejec_expresion(inst.cond,TS)
     while exp:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_While")
 
-        ejec_instrucciones(inst.instrucciones,TablaLocal)
-        TS.salida+= TablaLocal.salida
+        ret_ = ejec_instrucciones(inst.instrucciones,TablaLocal)
+        if ret_!= None and isinstance(ret_,inst_Break):
+            TS.salida+= TablaLocal.salida
+            break
+        
         exp = ejec_expresion(inst.cond,TS)
+        TS.salida+= TablaLocal.salida
+    
+        
+    
+    
 
 def ejec_For(inst,TS):
     TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_For")
@@ -219,8 +241,10 @@ def ejec_For(inst,TS):
     exp= ejec_expresion(inst.cond,TablaLocal)
 
     while exp:
-        ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
-        
+        ret_ = ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
+        if ret_!= None and isinstance(ret_,inst_Break):
+            
+            break
         ejec_instrucciones(inst.instruccion2,TablaLocal)
         exp = ejec_expresion(inst.cond,TablaLocal)
     TS.salida+= TablaLocal.salida

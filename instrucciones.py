@@ -54,4 +54,16 @@ class inst_for(controlFlujo):
         self.instruccion2 = instruccion2
         self.instruccion_verdadero = instruccion_verdadero
 
+
+class inst_Continue(controlFlujo):
+    '''Clase Sentencia Continue'''
+
+class inst_Break(controlFlujo):
+    '''Clase Sentencia Break'''
+
+class inst_Return(controlFlujo):
+    def __init__(self,valor):
+        self.valor = valor
+        
+
         
