@@ -16,6 +16,7 @@ from tkinter import ttk
 
 from interprete import *
 import gramatica as g
+from reportes import *
 
 class interfazAreaTexto():
 
@@ -64,12 +65,14 @@ class interfazAreaTexto():
             instrucciones = g.parse(texto)
 
             #print(instrucciones)
+            TS = TablaSimbolos()
             try:
-               ejec_instrucciones(instrucciones)
+               ejec_instrucciones(instrucciones,TS)
             except Exception as e:
                print("Error",e)
             
-            
+            crearReporteErroes(g.listaErrores)
+            crearReporteTablaSimbolos(TS)
 
         
         ventana = Tk()

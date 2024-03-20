@@ -1,4 +1,6 @@
 
+from errores import error
+listaErrores =[]
 
 reservadas = {
     'console':'CONSOLE',
@@ -139,7 +141,7 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
-    
+    listaErrores.append(error("Error lexico del valor" + str(t.value[0]),t.lexer.lineno,t.lexer.lexpos,"lexico"))
     print("Error Léxico '%s'" % t.value[0])
     t.lexer.skip(1)
 
@@ -365,10 +367,10 @@ def p_valorBoolean(t):
 
 def p_error(p):
     if p:
-        
+        listaErrores.append(error("Token inesperado "+ str(p.value),p.lineno,p.lexpos,'sintactico'))
         print(f"Error de sintaxis en línea {p.lineno}, columna {p.lexpos}: Token inesperado '{p.value}'")
     else:
-        
+        #listaErrores.append(error("Token inesperado "+ str(p.value),p.lineno,p.lexpos,'sintactico'))
         print("Error de sintaxis")
 
 import ply.lex as Lex
