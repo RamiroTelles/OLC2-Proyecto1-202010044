@@ -114,6 +114,15 @@ def t_CARACTER(t):
         t.value = ''
     return t
 
+def t_DECIMAL(t):
+    r'\d+\.\d+'
+    try:
+        t.value = float(t.value)
+    except ValueError:
+        print("Integer value too large %d", t.value)
+        t.value = 0
+    return t
+
 def t_ENTERO(t):
     r'\d+'
     try:
@@ -123,14 +132,7 @@ def t_ENTERO(t):
         t.value = 0
     return t
 
-def t_DECIMAL(t):
-    r'\d+\.\d+'
-    try:
-        t.value = int(t.value)
-    except ValueError:
-        print("Integer value too large %d", t.value)
-        t.value = 0
-    return t
+
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*' 
