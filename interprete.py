@@ -6,27 +6,35 @@ from tipos import TIPOS_P,TIPOS_Simbolos
 from errores import error
 
 listaErrores =[]
+SalidaConsola = ""
+TSReporte = TablaSimbolos()
 
-def ejec_instrucciones(instrucciones,TS):
+def ejec_instrucciones(instrucciones,TS,save=False):
+    
     for inst in instrucciones:
-        if isinstance(inst,Imprimir): ejec_Imprimir(inst,TS)
-        elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
-        elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
-        elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
-        elif isinstance(inst,controlFlujo): 
-            tipo_Inst=ejec_controlFlujo(inst,TS)
-            if tipo_Inst!=None:
-                return tipo_Inst
+        if save:
+
+            if isinstance(inst,Imprimir): ejec_Imprimir(inst,TS)
+            elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
+            elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
+            elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
+            elif isinstance(inst,controlFlujo): 
+                tipo_Inst=ejec_controlFlujo(inst,TS)
+                if tipo_Inst!=None:
+                    return tipo_Inst
+        else:
+            if isinstance(inst,guardar_func): ejec_Guardar_Func(inst,TS)
         #else: print('Error: instruccion no valida')
         
 
 def ejec_Imprimir(inst,TS):
+    global SalidaConsola
     for exp in inst.lista:
         #print('>> ', ejec_expresion(exp,TS))
         result = ejec_expresion(exp,TS)
-        TS.salida+= "> "
-        TS.salida+= str(result)
-        TS.salida += "\n"
+        SalidaConsola += "> "
+        SalidaConsola += str(result)
+        SalidaConsola += "\n"
     
 
 def ejec_expresion(exp,TS):
@@ -142,6 +150,7 @@ def ejec_declaracion_explicita(inst,TS):
         simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
         
     TS.agregar(simbolo)
+    TSReporte.agregar(simbolo)
 
 def ejec_declaracion_implicita(inst,TS):
     exp = ejec_expresion(inst.valor,TS)
@@ -160,6 +169,7 @@ def ejec_declaracion_implicita(inst,TS):
     else:
         simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
     TS.agregar(simbolo)
+    TSReporte.agregar(simbolo)
 
 def ejec_Asignacion(inst,TS):
     exp = ejec_expresion(inst.valor,TS)
@@ -190,6 +200,7 @@ def ejec_Asignacion(inst,TS):
         print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
         listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
     TS.actualizar(inst.id,exp)
+    TSReporte(inst.id,exp)
 
 
 def ejec_controlFlujo(inst,TS):
@@ -220,13 +231,13 @@ def ejec_If(inst,TS):
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
         ret_ = ejec_instrucciones(inst.instruccionesIf,TablaLocal)
-        TS.salida+= TablaLocal.salida
+        #TS.salida+= TablaLocal.salida
         
     else:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
         ret_ = ejec_instrucciones(inst.instruccionesElse,TablaLocal)
-        TS.salida+= TablaLocal.salida
+        #TS.salida+= TablaLocal.salida
     
     return ret_
 
@@ -238,11 +249,11 @@ def ejec_While(inst,TS):
 
         ret_ = ejec_instrucciones(inst.instrucciones,TablaLocal)
         if ret_!= None and isinstance(ret_,inst_Break):
-            TS.salida+= TablaLocal.salida
+            #TS.salida+= TablaLocal.salida
             break
         
         exp = ejec_expresion(inst.cond,TS)
-        TS.salida+= TablaLocal.salida
+        #TS.salida+= TablaLocal.salida
     
         
     
@@ -260,7 +271,7 @@ def ejec_For(inst,TS):
             break
         ejec_instrucciones(inst.instruccion2,TablaLocal)
         exp = ejec_expresion(inst.cond,TablaLocal)
-    TS.salida+= TablaLocal.salida
+    #TS.salida+= TablaLocal.salida
         
 def ejec_Switch(inst,TS):
     valorId = ejec_expresion(inst.id,TS)
@@ -289,4 +300,17 @@ def ejec_Switch(inst,TS):
             
                 break
 
-    TS.salida+= TablaLocal.salida
+    #TS.salida+= TablaLocal.salida
+
+def ejec_Guardar_Func(inst,TS):
+    sim =TS.obtener(inst.id)
+    if sim!=None:
+        if sim.tipo_simbolo==TIPOS_Simbolos.FUNCION:
+            print("Ya declarada Funcion "+inst.id)
+            listaErrores.append(error("Ya declarada Funcion "+inst.id,0,0,"Semantico"))
+            return
+    
+    simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.FUNCION,tipo=inst.tipo,valor=None,ambito=TS.ambito,parametros=inst.listaParametros,instrucciones=inst.instrucciones)
+
+    TS.agregar(simbolo)
+    TSReporte.agregar(simbolo)

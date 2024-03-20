@@ -69,17 +69,19 @@ class interfazAreaTexto():
             
             try:
                inter.ejec_instrucciones(instrucciones,TS)
+               inter.ejec_instrucciones(instrucciones,TS,True)
             except Exception as e:
                print("Error",e)
             inter.listaErrores.extend(g.listaErrores)
             crearReporteErroes(inter.listaErrores)
-            crearReporteTablaSimbolos(TS)
+            crearReporteTablaSimbolos(inter.TSReporte)
 
             posicion_actual = t_console.index("insert")
 
             # Insertar el texto en la posición actual del cursor
-            t_console.insert(posicion_actual, TS.salida)
+            t_console.insert(posicion_actual, inter.SalidaConsola)
             TS.limpiar()
+            inter.SalidaConsola=""
             inter.listaErrores.clear()
             
 

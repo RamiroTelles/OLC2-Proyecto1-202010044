@@ -191,8 +191,43 @@ def p_instruccion(t) :
                         | sContinue
                         | sBreak
                         | sReturn
-                        | sSwitch'''
+                        | sSwitch
+                        | declaracion_Funcion'''
     t[0] = t[1]
+
+#def p_callFuncion(t):
+#    '''callFuncion  : '''
+
+def p_declaracion_funcion(t):
+    '''declaracion_Funcion  : FUNCTION ID PARIZQ parametros tipoFuncion instrucciones LLAVDER'''
+    t[0] = guardar_func(t[2],t[4],t[5],t[6])
+
+def p_parametros1(t):
+    '''parametros   : PARDER '''
+    t[0]=[]
+
+def p_parametros2(t):
+    '''parametros   : lista_Parametros PARDER'''
+    t[0] = t[1]
+
+def p_lista_Parametros(t):
+    '''lista_Parametros : lista_Parametros COMA ID DOSPUNTOS tipo
+                        | ID DOSPUNTOS tipo'''
+    if len(t)==6:
+        t[1].append(DeclaracionExplicita(t[3],ExpresionNull(),t[5]))
+        t[0] = t[1]
+    elif len(t)==4:   
+        t[0] = [DeclaracionExplicita(t[1],ExpresionNull(),t[3])]
+    
+def p_tipoFuncion(t):
+    '''tipoFuncion  : DOSPUNTOS tipo LLAVIZQ
+                    | LLAVIZQ'''
+    if len(t)==4:
+        t[0]=t[2]
+    elif len(t)==2:
+        t[0]= TIPOS_P.VOID
+
+
 
 def p_sSwitch(t):
     '''sSwitch  : SWITCH PARIZQ op_Ternario PARDER LLAVIZQ listCases LLAVDER'''

@@ -72,6 +72,12 @@ class inst_Return(controlFlujo):
     def __init__(self,valor):
         self.valor = valor
 
+class guardar_func():
+    def __init__(self,id,listaParametros,tipo,instrucciones):
+        self.id = id
+        self.listaParametros = listaParametros
+        self.tipo = tipo
+        self.instrucciones = instrucciones
         
 
         
