@@ -187,6 +187,11 @@ def ejec_Asignacion(inst,TS):
 
 
 def ejec_controlFlujo(inst,TS):
+    if isinstance(inst,inst_if): ejec_If(inst,TS)
+    elif isinstance(inst,inst_while): ejec_While(inst,TS)
+    elif isinstance(inst,inst_for): ejec_For(inst,TS)
+    
+def ejec_If(inst,TS):
     exp = ejec_expresion(inst.cond,TS)
     if exp:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
@@ -198,4 +203,25 @@ def ejec_controlFlujo(inst,TS):
 
         ejec_instrucciones(inst.instruccionesElse,TablaLocal)
         TS.salida+= TablaLocal.salida
-    
+
+def ejec_While(inst,TS):
+    exp = ejec_expresion(inst.cond,TS)
+    while exp:
+        TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_While")
+
+        ejec_instrucciones(inst.instrucciones,TablaLocal)
+        TS.salida+= TablaLocal.salida
+        exp = ejec_expresion(inst.cond,TS)
+
+def ejec_For(inst,TS):
+    TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_For")
+    ejec_instrucciones(inst.instruccion1,TablaLocal)
+    exp= ejec_expresion(inst.cond,TablaLocal)
+
+    while exp:
+        ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
+        
+        ejec_instrucciones(inst.instruccion2,TablaLocal)
+        exp = ejec_expresion(inst.cond,TablaLocal)
+    TS.salida+= TablaLocal.salida
+        

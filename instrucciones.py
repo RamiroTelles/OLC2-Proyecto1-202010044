@@ -41,4 +41,17 @@ class inst_if(controlFlujo):
         self.cond = cond
         self.instruccionesIf = instruccionesIf
         self.instruccionesElse=instruccionesElse
+
+class inst_while(controlFlujo):
+    def __init__(self,cond,instrucciones):
+        self.cond = cond
+        self.instrucciones = instrucciones
+        
+class inst_for(controlFlujo):
+    def __init__(self,instruccion1,cond,instruccion2,instruccion_verdadero):
+        self.instruccion1 = instruccion1
+        self.cond = cond
+        self.instruccion2 = instruccion2
+        self.instruccion_verdadero = instruccion_verdadero
+
         

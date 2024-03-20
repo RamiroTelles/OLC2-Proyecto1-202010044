@@ -17,6 +17,8 @@ reservadas = {
     'char': 'CHAR',
     'if':'IF',
     'else' : 'ELSE',
+    'while': 'WHILE',
+    'for': 'FOR',
     'function': 'FUNCTION',
     'interface': 'INTERFACE'
 }
@@ -172,9 +174,19 @@ def p_instrucciones_instruccion(t) :
 def p_instruccion(t) :
     '''instruccion      : imprimir_instr
                         | declaracion
-                        | asignacion
-                        | sIf'''
+                        | asignacion PUNTOCOMA
+                        | sIf
+                        | sWhile
+                        | sFor'''
     t[0] = t[1]
+
+def p_sFor(t):
+    '''sFor : FOR PARIZQ declaracion op_Ternario PUNTOCOMA asignacion PARDER LLAVIZQ instrucciones LLAVDER'''
+    t[0]= inst_for([t[3]],t[4],[t[6]],t[9])
+
+def p_sWhile(t):
+    '''sWhile   : WHILE PARIZQ op_Ternario PARDER LLAVIZQ instrucciones LLAVDER'''
+    t[0] = inst_while(t[3],t[6])
 
 def p_sIf1(t):
     '''sIf  : IF PARIZQ op_Ternario PARDER LLAVIZQ instrucciones sIf2'''
@@ -196,10 +208,10 @@ def p_sElse2(t):
     '''sElse    : sIf'''
     t[0]=[t[1]]
 
-def p_asignacion(t):
-    '''asignacion   : ID IGUAL op_Ternario PUNTOCOMA
-                    | ID MAS IGUAL op_Ternario PUNTOCOMA
-                    | ID MENOS IGUAL op_Ternario PUNTOCOMA'''
+def p_asignacion1(t):
+    '''asignacion   : ID IGUAL op_Ternario
+                    | ID MAS IGUAL op_Ternario
+                    | ID MENOS IGUAL op_Ternario'''
     
     if t[2]=='=':
         t[0] = Asignacion(t[1],t[3])
@@ -207,6 +219,15 @@ def p_asignacion(t):
         t[0]=Asignacion( t[1],ExpresionBinaria(ExpresionID(t[1]),t[4],OPERACION_ARITMETICA.MAS))
     elif t[2]=='-':
         t[0]=Asignacion( t[1],ExpresionBinaria(ExpresionID(t[1]),t[4],OPERACION_ARITMETICA.MENOS))
+
+def p_asignacion2(t):
+    '''asignacion   : ID MAS MAS
+                    | ID MENOS MENOS'''
+    if t[3]=='+':
+        t[0]= Asignacion(t[1],ExpresionBinaria(ExpresionID(t[1]),ExpresionEntero(1),OPERACION_ARITMETICA.MAS))
+    elif t[3]=='-':
+        t[0]= Asignacion(t[1],ExpresionBinaria(ExpresionID(t[1]),ExpresionEntero(1),OPERACION_ARITMETICA.MENOS))  
+
 
 def p_declaracion1(t):
     '''declaracion  : tipoVar ID DOSPUNTOS tipo declaracion_explicita'''
