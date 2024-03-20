@@ -8,7 +8,6 @@ reservadas = {
     'true':'TRUE',
     'false':'FALSE',
     'null':'NULL',
-    'let':'LET',
     'var':'VAR',
     'const':'CONST',
     'number': 'NUMBER',
@@ -27,6 +26,8 @@ tokens = [
    
     'PARIZQ',
     'PARDER',
+    'LLAVIZQ',
+    'LLAVDER',
     'IGUAL',
     'MAS',
     'MENOS',
@@ -68,6 +69,8 @@ tokens = [
 t_IGUAL     = r'='
 t_PARIZQ    = r'\('
 t_PARDER    = r'\)'
+t_LLAVIZQ   = r'{'
+t_LLAVDER   = r'}'
 t_MAS       = r'\+'
 t_MENOS     = r'-'
 t_POR       = r'\*'
@@ -169,13 +172,41 @@ def p_instrucciones_instruccion(t) :
 def p_instruccion(t) :
     '''instruccion      : imprimir_instr
                         | declaracion
-                        | asignacion'''
+                        | asignacion
+                        | sIf'''
     t[0] = t[1]
 
+def p_sIf1(t):
+    '''sIf  : IF PARIZQ op_Ternario PARDER LLAVIZQ instrucciones sIf2'''
+    t[0] = inst_if(t[3],t[6],t[7])
+
+def p_sIf2_1(t):
+    '''sIf2  : LLAVDER ELSE sElse'''
+    t[0]=t[3]
+
+def p_sIf2_2(t):
+    '''sIf2  : LLAVDER'''
+    t[0]= []
+
+def p_sElse1(t):
+    '''sElse    : LLAVIZQ instrucciones LLAVDER'''
+    t[0]= t[2]
+
+def p_sElse2(t):
+    '''sElse    : sIf'''
+    t[0]=[t[1]]
 
 def p_asignacion(t):
-    '''asignacion    : ID IGUAL op_Ternario PUNTOCOMA'''
-    t[0] = Asignacion(t[1],t[3])
+    '''asignacion   : ID IGUAL op_Ternario PUNTOCOMA
+                    | ID MAS IGUAL op_Ternario PUNTOCOMA
+                    | ID MENOS IGUAL op_Ternario PUNTOCOMA'''
+    
+    if t[2]=='=':
+        t[0] = Asignacion(t[1],t[3])
+    elif t[2]=='+':
+        t[0]=Asignacion( t[1],ExpresionBinaria(ExpresionID(t[1]),t[4],OPERACION_ARITMETICA.MAS))
+    elif t[2]=='-':
+        t[0]=Asignacion( t[1],ExpresionBinaria(ExpresionID(t[1]),t[4],OPERACION_ARITMETICA.MENOS))
 
 def p_declaracion1(t):
     '''declaracion  : tipoVar ID DOSPUNTOS tipo declaracion_explicita'''
@@ -275,7 +306,7 @@ def p_exp_And2(t):
 def p_exp_Not1(t):
     '''exp_Not  : lNot exp_Comp'''
     if t[1]%2==0:
-        t[0] = t[1]
+        t[0] = t[2]
     else:
         t[0]= ExpresionNot(t[2])
 

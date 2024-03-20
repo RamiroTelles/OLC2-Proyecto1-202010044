@@ -32,3 +32,13 @@ class Asignacion(Instruccion):
         self.valor = valor
         self.linea=linea
         self.columna=columna
+
+class controlFlujo(Instruccion):
+    '''Clase Abstracta para flujo de control'''
+
+class inst_if(controlFlujo):
+    def __init__(self,cond,instruccionesIf,instruccionesElse):
+        self.cond = cond
+        self.instruccionesIf = instruccionesIf
+        self.instruccionesElse=instruccionesElse
+        

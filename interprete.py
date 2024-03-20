@@ -11,6 +11,7 @@ def ejec_instrucciones(instrucciones,TS):
         elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
         elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
         elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
+        elif isinstance(inst,controlFlujo): ejec_controlFlujo(inst,TS)
         #else: print('Error: instruccion no valida')
 
 def ejec_Imprimir(inst,TS):
@@ -183,3 +184,18 @@ def ejec_Asignacion(inst,TS):
         print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
         TS.listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
     TS.actualizar(inst.id,exp)
+
+
+def ejec_controlFlujo(inst,TS):
+    exp = ejec_expresion(inst.cond,TS)
+    if exp:
+        TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
+
+        ejec_instrucciones(inst.instruccionesIf,TablaLocal)
+        TS.salida+= TablaLocal.salida
+    else:
+        TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
+
+        ejec_instrucciones(inst.instruccionesElse,TablaLocal)
+        TS.salida+= TablaLocal.salida
+    

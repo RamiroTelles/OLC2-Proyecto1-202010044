@@ -39,7 +39,7 @@ class TablaSimbolos():
             self.simbolos[id].valor = valor
 
     def limpiar(self):
-        
+        #self.salida=""
         self.listaErrores.clear()
         self.simbolos.clear()
         self.ambito='global'
