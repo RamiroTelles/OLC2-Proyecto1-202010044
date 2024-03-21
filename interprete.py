@@ -132,7 +132,7 @@ def ejec_declaracion_explicita(inst,TS):
     if TS.obtener(inst.id)!=None:
         print("Ya declarada variable "+inst.id)
         listaErrores.append(error("Ya declarada variable "+inst.id,0,0,"Semantico"))
-        return
+        #return
     try:
         if inst.tipo==TIPOS_P.ENTERO:
             exp= int(exp)
@@ -284,11 +284,14 @@ def ejec_While(inst,TS):
     
 
 def ejec_For(inst,TS):
+    
+
     TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_For")
     ejec_instrucciones(inst.instruccion1,TablaLocal)
     exp= ejec_expresion(inst.cond,TablaLocal)
 
     while exp:
+        
         tupla = ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
         if tupla!=None:
 
@@ -299,6 +302,7 @@ def ejec_For(inst,TS):
                 
                 return tupla
         ejec_instrucciones(inst.instruccion2,TablaLocal)
+        #TablaLocal.actualizar(inst.instruccion2[0].id,ejec_expresion(inst.instruccion2[0].valor,TablaLocal))
         exp = ejec_expresion(inst.cond,TablaLocal)
     #TS.salida+= TablaLocal.salida
         

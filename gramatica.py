@@ -100,7 +100,7 @@ t_INTERROGACION = r'\?'
 t_COMA          = r','
 
 def t_CADENA(t):
-    r'\"(.+?)\"'
+    r'\"(.*)\"'
     try:
         t.value = str(t.value)
     except ValueError:

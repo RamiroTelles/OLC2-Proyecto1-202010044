@@ -88,7 +88,7 @@ class interfazAreaTexto():
         
         ventana = Tk()
 
-        ventana.geometry("920x600")
+        ventana.geometry("1580x700")
         ventana.config(bg="#00E7CE")
         ventana.resizable(False,False)
 
@@ -99,7 +99,7 @@ class interfazAreaTexto():
         l_Console = Label(ventana,text="Consola:")
 
         l_Editor.place(x=35,y=50)
-        l_Console.place(x=475,y=50)
+        l_Console.place(x=803,y=50)
         
         #b_reporte = Button(ventana,text="Generar Reportes", command=generarReporte)
         #b_Cargar = Button(ventana, text="Cargar Archivo form", command=cargarArchivo)
@@ -107,17 +107,17 @@ class interfazAreaTexto():
 
         #b_Cargar.place(x=30,y=15)
 
-        b_analizar.place(x=50,y=540)
+        b_analizar.place(x=50,y=650)
 
         #b_reporte.place(x=520,y=45)
 
-        t_editor = ScrolledText(ventana,width=50,height=26)
-        t_console = ScrolledText(ventana,width=50,height=26)
+        t_editor = ScrolledText(ventana,width=93,height=32)
+        t_console = ScrolledText(ventana,width=93,height=32)
         #ScrolVer = Scrollbar(ventana, command=t_editor.yview)
         #cajaCombo = ttk.Combobox(ventana,values=["Generar Reporte Tokens","Generar Reporte Errores","Manual de Usuario","Manual Técnico"],state="readonly")
         
         t_editor.place(x=30,y=80)
-        t_console.place(x=470,y=80)
+        t_console.place(x=800,y=80)
         #cajaCombo.place(x=600,y=45)
         #cajaCombo.current(0)
 
