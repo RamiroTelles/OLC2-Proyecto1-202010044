@@ -79,5 +79,10 @@ class guardar_func():
         self.tipo = tipo
         self.instrucciones = instrucciones
         
+class call_func(controlFlujo):
+    def __init__(self,id,listaParametros):
+        self.id = id
+        self.listaParametros = listaParametros
+
 
         

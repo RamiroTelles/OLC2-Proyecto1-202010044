@@ -192,11 +192,32 @@ def p_instruccion(t) :
                         | sBreak
                         | sReturn
                         | sSwitch
-                        | declaracion_Funcion'''
+                        | declaracion_Funcion
+                        | callFuncion PUNTOCOMA'''
     t[0] = t[1]
 
-#def p_callFuncion(t):
-#    '''callFuncion  : '''
+def p_callFuncion(t):
+    '''callFuncion  : ID PARIZQ venir_Expresiones'''
+    t[0]= call_func(t[1],t[3])
+
+def p_venir_Expresiones1(t):
+    '''venir_Expresiones    : lista_Expresiones PARDER'''
+    t[0]= t[1]
+
+def p_venir_Expresiones2(t):
+    '''venir_Expresiones    : PARDER'''
+    t[0]=[]
+
+
+
+def p_lista_Expresiones1(t):
+    '''lista_Expresiones    : lista_Expresiones COMA op_Ternario'''
+    t[1].append(t[3])
+    t[0]=t[1]
+
+def p_lista_Expresiones2(t):
+    '''lista_Expresiones    : op_Ternario'''
+    t[0] = [t[1]]
 
 def p_declaracion_funcion(t):
     '''declaracion_Funcion  : FUNCTION ID PARIZQ parametros tipoFuncion instrucciones LLAVDER'''
@@ -531,6 +552,10 @@ def p_valorNull(t):
 def p_valorId(t):
     '''valor    : ID'''
     t[0]=ExpresionID(t[1])
+
+def p_valorCallFuncion(t):
+    '''valor    : callFuncion'''
+    t[0]=t[1]
     
     
 

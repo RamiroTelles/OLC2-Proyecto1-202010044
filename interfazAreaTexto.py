@@ -68,8 +68,8 @@ class interfazAreaTexto():
             #print(instrucciones)
             
             try:
+               inter.ejec_instrucciones(instrucciones,TS,False)
                inter.ejec_instrucciones(instrucciones,TS)
-               inter.ejec_instrucciones(instrucciones,TS,True)
             except Exception as e:
                print("Error",e)
             inter.listaErrores.extend(g.listaErrores)

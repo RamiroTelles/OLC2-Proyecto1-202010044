@@ -4,12 +4,14 @@ from instrucciones import *
 from simbolos import *
 from tipos import TIPOS_P,TIPOS_Simbolos
 from errores import error
+import copy
 
 listaErrores =[]
 SalidaConsola = ""
+global TSReporte
 TSReporte = TablaSimbolos()
 
-def ejec_instrucciones(instrucciones,TS,save=False):
+def ejec_instrucciones(instrucciones,TS,save=True):
     
     for inst in instrucciones:
         if save:
@@ -18,10 +20,13 @@ def ejec_instrucciones(instrucciones,TS,save=False):
             elif isinstance(inst,DeclaracionExplicita): ejec_declaracion_explicita(inst,TS)
             elif isinstance(inst,DeclaracionImplicita): ejec_declaracion_implicita(inst,TS)
             elif isinstance(inst,Asignacion): ejec_Asignacion(inst,TS)
-            elif isinstance(inst,controlFlujo): 
-                tipo_Inst=ejec_controlFlujo(inst,TS)
-                if tipo_Inst!=None:
-                    return tipo_Inst
+            elif isinstance(inst,controlFlujo): #ejec_controlFlujo(inst,TS)
+                tupla=ejec_controlFlujo(inst,TS)
+                if tupla!=None:
+                    return tupla
+                    #pass
+            elif isinstance(inst,guardar_func): pass
+                
         else:
             if isinstance(inst,guardar_func): ejec_Guardar_Func(inst,TS)
         #else: print('Error: instruccion no valida')
@@ -52,6 +57,11 @@ def ejec_expresion(exp,TS):
         return resolver_expresionTernaria(exp,TS)
     elif isinstance(exp,ExpresionID):
         return resolver_expresionId(exp,TS)
+    elif isinstance(exp,call_func):
+        tupla =ejec_Funcion(exp,TS)
+        if tupla!=None:
+            return tupla[1]
+        
     elif isinstance(exp,ExpresionNull):
         return None
     else :
@@ -150,6 +160,7 @@ def ejec_declaracion_explicita(inst,TS):
         simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
         
     TS.agregar(simbolo)
+    
     TSReporte.agregar(simbolo)
 
 def ejec_declaracion_implicita(inst,TS):
@@ -169,9 +180,11 @@ def ejec_declaracion_implicita(inst,TS):
     else:
         simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
     TS.agregar(simbolo)
+    
     TSReporte.agregar(simbolo)
 
 def ejec_Asignacion(inst,TS):
+    
     exp = ejec_expresion(inst.valor,TS)
     simbolo = TS.obtener(inst.id)
     
@@ -200,46 +213,52 @@ def ejec_Asignacion(inst,TS):
         print("Error, "+inst.id+" No se puede asignar un tipo de variable diferente")
         listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
     TS.actualizar(inst.id,exp)
-    TSReporte(inst.id,exp)
+    
+    TSReporte.actualizar(inst.id,exp)
 
 
 def ejec_controlFlujo(inst,TS):
     if isinstance(inst,inst_if): 
-        ret_ = ejec_If(inst,TS)
-        if ret_ != None:
-            return ret_
+        tupla = ejec_If(inst,TS)
+        if tupla != None:
+            return tupla
 
-    elif isinstance(inst,inst_while): ejec_While(inst,TS)
-    elif isinstance(inst,inst_for): ejec_For(inst,TS)
-    elif isinstance(inst,inst_switch): ejec_Switch(inst,TS)
+    elif isinstance(inst,inst_while): return ejec_While(inst,TS)
+    elif isinstance(inst,inst_for): return ejec_For(inst,TS)
+    elif isinstance(inst,inst_switch): return ejec_Switch(inst,TS)
+    elif isinstance(inst,call_func): ejec_Funcion(inst,TS)
     elif isinstance(inst,inst_Continue): 
-        if(TS.ambito[len(TS.ambito)-5:]=='While' or TS.ambito[len(TS.ambito)-3:]=='For'):
-            return inst
+        if('While' in TS.ambito or 'For' in TS.ambito):
+            return inst,None
         else:
             print("Sentencia continue fuera de un Ciclo")
             listaErrores.append(error("Sentencia continue fuera de un Ciclo",0,0,"Semantico"))
     elif isinstance(inst,inst_Break): 
-        if(TS.ambito[len(TS.ambito)-5:]=='While' or TS.ambito[len(TS.ambito)-3:]=='For' or TS.ambito[len(TS.ambito)-6:]=='Switch'):
-            return inst
+       
+        
+        if('While' in TS.ambito or 'For' in TS.ambito or 'Switch' in TS.ambito):
+            return inst,None
         else:
             print("Sentencia break fuera de flujo de control valido")
             listaErrores.append(error("Sentencia break fuera de flujo de control valido",0,0,"Semantico"))
+    elif isinstance(inst,inst_Return):
+        return inst,ejec_expresion(inst.valor,TS) 
     
 def ejec_If(inst,TS):
     exp = ejec_expresion(inst.cond,TS)
     if exp:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
-        ret_ = ejec_instrucciones(inst.instruccionesIf,TablaLocal)
+        tupla = ejec_instrucciones(inst.instruccionesIf,TablaLocal)
         #TS.salida+= TablaLocal.salida
         
     else:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_If")
 
-        ret_ = ejec_instrucciones(inst.instruccionesElse,TablaLocal)
+        tupla = ejec_instrucciones(inst.instruccionesElse,TablaLocal)
         #TS.salida+= TablaLocal.salida
     
-    return ret_
+    return tupla
 
 def ejec_While(inst,TS):
     
@@ -247,11 +266,16 @@ def ejec_While(inst,TS):
     while exp:
         TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_While")
 
-        ret_ = ejec_instrucciones(inst.instrucciones,TablaLocal)
-        if ret_!= None and isinstance(ret_,inst_Break):
-            #TS.salida+= TablaLocal.salida
-            break
-        
+        tupla = ejec_instrucciones(inst.instrucciones,TablaLocal)
+        if tupla!=None:
+
+            if isinstance(tupla[0],inst_Break):
+                
+                break
+            if isinstance(tupla[0],inst_Return):
+                
+                return tupla
+
         exp = ejec_expresion(inst.cond,TS)
         #TS.salida+= TablaLocal.salida
     
@@ -265,10 +289,15 @@ def ejec_For(inst,TS):
     exp= ejec_expresion(inst.cond,TablaLocal)
 
     while exp:
-        ret_ = ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
-        if ret_!= None and isinstance(ret_,inst_Break):
-            
-            break
+        tupla = ejec_instrucciones(inst.instruccion_verdadero,TablaLocal)
+        if tupla!=None:
+
+            if isinstance(tupla[0],inst_Break):
+                
+                break
+            if isinstance(tupla[0],inst_Return):
+                
+                return tupla
         ejec_instrucciones(inst.instruccion2,TablaLocal)
         exp = ejec_expresion(inst.cond,TablaLocal)
     #TS.salida+= TablaLocal.salida
@@ -287,18 +316,28 @@ def ejec_Switch(inst,TS):
     TablaLocal = TablaSimbolos(simbolos=TS.simbolos.copy(),ambito=TS.ambito +"_Switch")
     if contador!=-1:
         for i in range(contador,len(inst.listaInst)):
-            ret_ = ejec_instrucciones(inst.listaInst[i],TablaLocal)
+            tupla = ejec_instrucciones(inst.listaInst[i],TablaLocal)
             
-            if ret_!= None and isinstance(ret_,inst_Break):
-            
-                break
+            if tupla!=None:
+
+                if isinstance(tupla[0],inst_Break):
+                    
+                    break
+                if isinstance(tupla[0],inst_Return):
+                    
+                    return tupla
     elif posDefault!=-1:
         for i in range(posDefault,len(inst.listaInst)):
-            ret_ = ejec_instrucciones(inst.listaInst[i],TablaLocal)
+            tupla = ejec_instrucciones(inst.listaInst[i],TablaLocal)
             
-            if ret_!= None and isinstance(ret_,inst_Break):
-            
-                break
+            if tupla!=None:
+
+                if isinstance(tupla[0],inst_Break):
+                    
+                    break
+                if isinstance(tupla[0],inst_Return):
+                    
+                    return tupla
 
     #TS.salida+= TablaLocal.salida
 
@@ -313,4 +352,26 @@ def ejec_Guardar_Func(inst,TS):
     simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.FUNCION,tipo=inst.tipo,valor=None,ambito=TS.ambito,parametros=inst.listaParametros,instrucciones=inst.instrucciones)
 
     TS.agregar(simbolo)
+    
     TSReporte.agregar(simbolo)
+
+
+def ejec_Funcion(inst,TS):
+    fun_ = TS.obtener(inst.id).instrucciones
+    params_ = TS.obtener(inst.id).parametros
+    TablaLocal = copy.deepcopy(TS)
+    TablaLocal.ambito = inst.id
+    for i in range(len(inst.listaParametros)):
+
+        exp = ejec_expresion(inst.listaParametros[i], TablaLocal)
+
+        
+
+        TablaLocal.agregar(Simbolos(params_[i].id,TIPOS_Simbolos.VARIABLE,params_[i].tipo,exp,TablaLocal.ambito))
+        
+        
+
+    tupla = ejec_instrucciones(fun_, TablaLocal)
+    #print(tupla)
+    if tupla!= None:
+        return tupla
