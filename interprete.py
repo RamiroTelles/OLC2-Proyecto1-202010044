@@ -8,7 +8,7 @@ import copy
 
 listaErrores =[]
 SalidaConsola = ""
-global TSReporte
+
 TSReporte = TablaSimbolos()
 
 def ejec_instrucciones(instrucciones,TS,save=True):
@@ -34,12 +34,13 @@ def ejec_instrucciones(instrucciones,TS,save=True):
 
 def ejec_Imprimir(inst,TS):
     global SalidaConsola
+    SalidaConsola += "> "
     for exp in inst.lista:
         #print('>> ', ejec_expresion(exp,TS))
         result = ejec_expresion(exp,TS)
-        SalidaConsola += "> "
+        
         SalidaConsola += str(result)
-        SalidaConsola += "\n"
+    SalidaConsola += "\n"
     
 
 def ejec_expresion(exp,TS):
@@ -161,7 +162,7 @@ def ejec_declaracion_explicita(inst,TS):
         
     TS.agregar(simbolo)
     
-    TSReporte.agregar(simbolo)
+    TSReporte.agregar(copy.deepcopy(simbolo))
 
 def ejec_declaracion_implicita(inst,TS):
     exp = ejec_expresion(inst.valor,TS)
@@ -181,7 +182,7 @@ def ejec_declaracion_implicita(inst,TS):
         simbolo = Simbolos(id=inst.id,tipo_simbolo=TIPOS_Simbolos.VARIABLE,tipo=inst.tipo,valor=exp,ambito=TS.ambito,linea=inst.linea,columna=inst.columna)
     TS.agregar(simbolo)
     
-    TSReporte.agregar(simbolo)
+    TSReporte.agregar(copy.deepcopy(simbolo))
 
 def ejec_Asignacion(inst,TS):
     
@@ -214,7 +215,7 @@ def ejec_Asignacion(inst,TS):
         listaErrores.append(error(inst.id+" No se puede asignar un tipo de variable diferente",0,0,"Semantico"))
     TS.actualizar(inst.id,exp)
     
-    TSReporte.actualizar(inst.id,exp)
+    TSReporte.actualizar(copy.deepcopy(inst.id),copy.deepcopy(exp))
 
 
 def ejec_controlFlujo(inst,TS):
@@ -357,7 +358,7 @@ def ejec_Guardar_Func(inst,TS):
 
     TS.agregar(simbolo)
     
-    TSReporte.agregar(simbolo)
+    TSReporte.agregar(copy.deepcopy(simbolo))
 
 
 def ejec_Funcion(inst,TS):
@@ -367,11 +368,11 @@ def ejec_Funcion(inst,TS):
     TablaLocal.ambito = inst.id
     for i in range(len(inst.listaParametros)):
 
-        exp = ejec_expresion(inst.listaParametros[i], TablaLocal)
+        exp = ejec_expresion(inst.listaParametros[i], TS)
 
         
 
-        TablaLocal.agregar(Simbolos(params_[i].id,TIPOS_Simbolos.VARIABLE,params_[i].tipo,exp,TablaLocal.ambito))
+        TablaLocal.agregar(Simbolos(params_[i].id,TIPOS_Simbolos.VARIABLE,params_[i].tipo,copy.deepcopy(exp),TablaLocal.ambito))
         
         
 
